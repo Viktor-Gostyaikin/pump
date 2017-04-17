@@ -1,0 +1,131 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://ws.pmp.ibs.ru/" name="NsiWs" targetNamespace="http://ws.pmp.ibs.ru/">
+<wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.pmp.ibs.ru/" elementFormDefault="unqualified" targetNamespace="http://ws.pmp.ibs.ru/" version="1.0">
+<xs:element name="filter">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="dictionaryName" type="xs:string"/>
+<xs:element name="versionDate" type="xs:dateTime"/>
+<xs:element name="sortField" type="xs:string"/>
+<xs:element name="pagingOffset" type="xs:int"/>
+<xs:element name="pagingSize" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="getDictionaries" type="tns:getDictionaries"/>
+<xs:element name="getDictionariesResponse" type="tns:getDictionariesResponse"/>
+<xs:element name="getDictionary" type="tns:getDictionary"/>
+<xs:element name="getDictionaryResponse" type="tns:getDictionaryResponse"/>
+<xs:complexType name="getDictionaries">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element form="qualified" name="versionDate" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="wsAuthInfo">
+<xs:sequence>
+<xs:element name="orgId" type="xs:long"/>
+<xs:element name="system" type="xs:string"/>
+<xs:element name="user" type="xs:string"/>
+<xs:element name="password" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getDictionariesResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:pmpGatewayResponseBean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="pmpGatewayResponseBean">
+<xs:sequence>
+<xs:element name="auth" type="xs:boolean"/>
+<xs:element minOccurs="0" name="code" type="xs:string"/>
+<xs:element minOccurs="0" name="message" type="xs:string"/>
+<xs:element minOccurs="0" name="response" type="xs:anyType"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getNsiDictionariesReturnObject">
+<xs:sequence>
+<xs:element minOccurs="0" name="nsiDictionaryList" type="tns:dictionaryDtoList"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dictionaryDtoList">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="list" nillable="true" type="tns:dictionaryDto"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="dictionaryDto">
+<xs:sequence>
+<xs:element minOccurs="0" name="code" type="xs:string"/>
+<xs:element minOccurs="0" name="dateVersion" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="version" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getDictionary">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element ref="tns:filter"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getDictionaryResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:pmpGatewayResponseBean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getDictionaryReturnObject">
+<xs:sequence>
+<xs:element minOccurs="0" name="nsiDictionaryEntryInfoList" type="tns:nsiEntriesPage"/>
+<xs:element minOccurs="0" name="pagingOffset" type="xs:int"/>
+<xs:element minOccurs="0" name="pagingSize" type="xs:int"/>
+<xs:element minOccurs="0" name="sortField" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="nsiEntriesPage">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="entries" nillable="true" type="tns:nsiEntry"/>
+<xs:element name="total" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="nsiEntry">
+<xs:sequence>
+<xs:element name="fields">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="key" type="xs:string"/>
+<xs:element minOccurs="0" name="value" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="getDictionaries">
+<wsdl:part element="ns1:getDictionaries" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getDictionaryResponse">
+<wsdl:part element="ns1:getDictionaryResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getDictionary">
+<wsdl:part element="ns1:getDictionary" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getDictionariesResponse">
+<wsdl:part element="ns1:getDictionariesResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:portType name="NsiWs">
+<wsdl:operation name="getDictionaries">
+<wsdl:input message="ns1:getDictionaries" name="getDictionaries"></wsdl:input>
+<wsdl:output message="ns1:getDictionariesResponse" name="getDictionariesResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getDictionary">
+<wsdl:input message="ns1:getDictionary" name="getDictionary"></wsdl:input>
+<wsdl:output message="ns1:getDictionaryResponse" name="getDictionaryResponse"></wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+</wsdl:definitions>

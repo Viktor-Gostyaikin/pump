@@ -1,0 +1,403 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://ws.practitioners.pmp.ibs.ru/" name="PractWs" targetNamespace="http://ws.practitioners.pmp.ibs.ru/">
+<wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.practitioners.pmp.ibs.ru/" elementFormDefault="unqualified" targetNamespace="http://ws.practitioners.pmp.ibs.ru/" version="1.0">
+<xs:element name="Practitioner" type="tns:practitioner"/>
+<xs:element name="createUpdateMOPractJob" type="tns:createUpdateMOPractJob"/>
+<xs:element name="createUpdateMOPractJobResponse" type="tns:createUpdateMOPractJobResponse"/>
+<xs:element name="createUpdateMoPract" type="tns:createUpdateMoPract"/>
+<xs:element name="createUpdateMoPractResponse" type="tns:createUpdateMoPractResponse"/>
+<xs:element name="deleteMOPractJobs" type="tns:deleteMOPractJobs"/>
+<xs:element name="deleteMOPractJobsResponse" type="tns:deleteMOPractJobsResponse"/>
+<xs:element name="deleteMOPracts" type="tns:deleteMOPracts"/>
+<xs:element name="deleteMOPractsResponse" type="tns:deleteMOPractsResponse"/>
+<xs:element name="getMOPract" type="tns:getMOPract"/>
+<xs:element name="getMOPractJob" type="tns:getMOPractJob"/>
+<xs:element name="getMOPractJobResponse" type="tns:getMOPractJobResponse"/>
+<xs:element name="getMOPractMessage" type="tns:getMOPractMessage"/>
+<xs:element name="getMOPractResponse" type="tns:getMOPractResponse"/>
+<xs:element name="jobsPage" type="tns:jobsPage"/>
+<xs:element name="pagingParameters" type="tns:pagingParameters"/>
+<xs:complexType name="deleteMOPractJobs">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element minOccurs="0" name="deleteRequest" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="wsAuthInfo">
+<xs:sequence>
+<xs:element name="orgId" type="xs:long"/>
+<xs:element name="system" type="xs:string"/>
+<xs:element name="user" type="xs:string"/>
+<xs:element name="password" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteMOPractJobsResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:jobMessage"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="jobMessage">
+<xs:sequence>
+<xs:element minOccurs="0" name="entity" type="tns:Job"/>
+<xs:element minOccurs="0" name="moKey" type="xs:long"/>
+<xs:element minOccurs="0" name="practId" type="xs:long"/>
+<xs:element minOccurs="0" name="result" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Job">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="department" type="tns:PractDepartment"/>
+<xs:element name="specCode" type="xs:string"/>
+<xs:element name="positionKindCode" type="xs:int"/>
+<xs:element name="workDateStart" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="workDateEnd" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="PractDepartment">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="mo" type="tns:Mo"/>
+<xs:element minOccurs="0" name="facetCode" type="xs:string"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Mo">
+<xs:complexContent>
+<xs:extension base="tns:abstractIdentifiable">
+<xs:sequence>
+<xs:element minOccurs="0" name="mcod" type="xs:string"/>
+<xs:element minOccurs="0" name="moid" type="xs:long"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="abstractIdentifiable">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="deleteMOPracts">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element minOccurs="0" name="deleteRequest" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteMOPractsResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:practMessage"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="practMessage">
+<xs:sequence>
+<xs:element minOccurs="0" name="entity" type="tns:practitioner"/>
+<xs:element minOccurs="0" name="result" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="practitioner">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="certificates">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="certificate" type="tns:Certificate"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="snils" type="xs:string"/>
+<xs:element name="docNum" type="xs:string"/>
+<xs:element name="lastName" type="xs:string"/>
+<xs:element name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="patronymic" type="xs:string"/>
+<xs:element name="birthDate" type="xs:date"/>
+<xs:element name="sex" type="xs:int"/>
+<xs:element name="isRecipe" type="xs:int"/>
+<xs:element minOccurs="0" name="isRecipeDateStart" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="isRecipeDateEnd" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Certificate">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element name="specCode" type="xs:string"/>
+<xs:element name="specCertSeria" type="xs:string"/>
+<xs:element name="certNum" type="xs:string"/>
+<xs:element minOccurs="0" name="certSchool" type="xs:string"/>
+<xs:element name="dateStart" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="dateEnd" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createUpdateMOPractJob">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element minOccurs="0" name="createUpdateMOPractJobRequest" type="tns:jobDTO"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="jobDTO">
+<xs:sequence>
+<xs:element name="practId" type="xs:long"/>
+<xs:element name="deptId" type="xs:long"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element name="specCode" type="xs:string"/>
+<xs:element name="positionKindCode" type="xs:int"/>
+<xs:element name="workDateStart" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="workDateEnd" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createUpdateMOPractJobResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:jobMessage"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMOPract">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element minOccurs="0" name="getMOPractRequestBean" type="tns:getMOPractRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMOPractRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="practCriterias" type="tns:practCriterias"/>
+<xs:element minOccurs="0" name="certCriterias" type="tns:certificateCriterias"/>
+<xs:element default="0" name="pagingOffset" type="xs:int"/>
+<xs:element default="25" name="pagingSize" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="practCriterias">
+<xs:sequence>
+<xs:element minOccurs="0" name="birthDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="changeDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="docNum" type="xs:string"/>
+<xs:element minOccurs="0" name="ffomsId" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="isRecipe" type="xs:int"/>
+<xs:element minOccurs="0" name="isRecipeDateEnd" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="isRecipeDateStart" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="lastName" type="xs:string"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="patronymic" type="xs:string"/>
+<xs:element minOccurs="0" name="sex" type="xs:int"/>
+<xs:element minOccurs="0" name="snils" type="xs:string"/>
+<xs:element minOccurs="0" name="systemsource" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="certificateCriterias">
+<xs:sequence>
+<xs:element minOccurs="0" name="certChangeDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="certDateEnd" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="certDateStart" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="certId" type="xs:long"/>
+<xs:element minOccurs="0" name="certNum" type="xs:string"/>
+<xs:element minOccurs="0" name="certSchool" type="xs:string"/>
+<xs:element minOccurs="0" name="certSpecCode" type="xs:string"/>
+<xs:element minOccurs="0" name="certSystemsource" type="xs:string"/>
+<xs:element minOccurs="0" name="specCertSeria" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMOPractResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:getMOPractMessage"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMOPractMessage">
+<xs:complexContent>
+<xs:extension base="tns:pagingParameters">
+<xs:sequence>
+<xs:element minOccurs="0" name="moKey" type="xs:long"/>
+<xs:element minOccurs="0" name="practitioner">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="practitioner" type="tns:practitioner"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="result" type="tns:rowResult"/>
+<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+<xs:element minOccurs="0" name="error" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="pagingParameters">
+<xs:sequence>
+<xs:element minOccurs="0" name="offset" type="xs:int"/>
+<xs:element minOccurs="0" name="size" type="xs:int"/>
+<xs:element minOccurs="0" name="sort" type="xs:string"/>
+<xs:element minOccurs="0" name="sortasc" type="xs:boolean"/>
+<xs:element name="totalCount" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="rowResult">
+<xs:sequence>
+<xs:element minOccurs="0" name="code" type="xs:string"/>
+<xs:element minOccurs="0" name="error" type="xs:string"/>
+<xs:element minOccurs="0" name="message" type="xs:string"/>
+<xs:element minOccurs="0" name="practitioner" type="tns:practitioner"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMOPractJob">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element minOccurs="0" name="getMOPractJobRequestBean" type="tns:getMOPractJobRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMOPractJobRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="moCriterias" type="tns:moCriterias"/>
+<xs:element minOccurs="0" name="moDeptCriterias" type="tns:moDepartmentCriterias"/>
+<xs:element minOccurs="0" name="practCriterias" type="tns:practCriterias"/>
+<xs:element minOccurs="0" name="jobCriterias" type="tns:jobCriterias"/>
+<xs:element default="0" minOccurs="0" name="pagingOffset" type="xs:int"/>
+<xs:element default="25" minOccurs="0" name="pagingSize" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="moCriterias">
+<xs:sequence>
+<xs:element minOccurs="0" name="moid" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="moDepartmentCriterias">
+<xs:sequence>
+<xs:element minOccurs="0" name="depServiceCondition" type="xs:string"/>
+<xs:element minOccurs="0" name="deptChangeDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="deptEndDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="deptFacetCode" type="xs:string"/>
+<xs:element minOccurs="0" name="deptId" type="xs:long"/>
+<xs:element minOccurs="0" name="deptName" type="xs:string"/>
+<xs:element minOccurs="0" name="deptProfileCode" type="xs:string"/>
+<xs:element minOccurs="0" name="deptStartDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="deptSystemSource" type="xs:string"/>
+<xs:element minOccurs="0" name="deptVozCode" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="jobCriterias">
+<xs:sequence>
+<xs:element minOccurs="0" name="jobChangeDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="jobId" type="xs:long"/>
+<xs:element minOccurs="0" name="jobPositionKindCode" type="xs:int"/>
+<xs:element minOccurs="0" name="jobSpecCode" type="xs:string"/>
+<xs:element minOccurs="0" name="jobSystemsource" type="xs:string"/>
+<xs:element minOccurs="0" name="jobWorkDateEnd" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="jobWorkDateStart" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMOPractJobResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:jobsPage"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="jobsPage">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="list" nillable="true" type="tns:jobItem"/>
+<xs:element name="offset" type="xs:int"/>
+<xs:element name="size" type="xs:int"/>
+<xs:element name="totalCount" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="jobItem">
+<xs:sequence>
+<xs:element minOccurs="0" name="changeDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="department" type="tns:deptItem"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="positionKindCode" type="xs:int"/>
+<xs:element minOccurs="0" name="practitioner" type="tns:practItem"/>
+<xs:element minOccurs="0" name="specCode" type="xs:string"/>
+<xs:element minOccurs="0" name="systemsource" type="xs:string"/>
+<xs:element minOccurs="0" name="workDateEnd" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="workDateStart" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deptItem">
+<xs:sequence>
+<xs:element minOccurs="0" name="facetCode" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="practItem">
+<xs:sequence>
+<xs:element minOccurs="0" name="birthDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="docNum" type="xs:string"/>
+<xs:element minOccurs="0" name="fio" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="lastName" type="xs:string"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="patronymic" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createUpdateMoPract">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element minOccurs="0" name="createUpdateMOPractRequest" type="tns:practitioner"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createUpdateMoPractResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:practMessage"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="deleteMOPractJobs">
+<wsdl:part element="ns1:deleteMOPractJobs" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="deleteMOPracts">
+<wsdl:part element="ns1:deleteMOPracts" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getMOPractResponse">
+<wsdl:part element="ns1:getMOPractResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createUpdateMoPractResponse">
+<wsdl:part element="ns1:createUpdateMoPractResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createUpdateMOPractJob">
+<wsdl:part element="ns1:createUpdateMOPractJob" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getMOPract">
+<wsdl:part element="ns1:getMOPract" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getMOPractJob">
+<wsdl:part element="ns1:getMOPractJob" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="deleteMOPractJobsResponse">
+<wsdl:part element="ns1:deleteMOPractJobsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getMOPractJobResponse">
+<wsdl:part element="ns1:getMOPractJobResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createUpdateMOPractJobResponse">
+<wsdl:part element="ns1:createUpdateMOPractJobResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="deleteMOPractsResponse">
+<wsdl:part element="ns1:deleteMOPractsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createUpdateMoPract">
+<wsdl:part element="ns1:createUpdateMoPract" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:portType name="PractWs">
+<wsdl:operation name="deleteMOPractJobs">
+<wsdl:input message="ns1:deleteMOPractJobs" name="deleteMOPractJobs"></wsdl:input>
+<wsdl:output message="ns1:deleteMOPractJobsResponse" name="deleteMOPractJobsResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="deleteMOPracts">
+<wsdl:input message="ns1:deleteMOPracts" name="deleteMOPracts"></wsdl:input>
+<wsdl:output message="ns1:deleteMOPractsResponse" name="deleteMOPractsResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="createUpdateMOPractJob">
+<wsdl:input message="ns1:createUpdateMOPractJob" name="createUpdateMOPractJob"></wsdl:input>
+<wsdl:output message="ns1:createUpdateMOPractJobResponse" name="createUpdateMOPractJobResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getMOPract">
+<wsdl:input message="ns1:getMOPract" name="getMOPract"></wsdl:input>
+<wsdl:output message="ns1:getMOPractResponse" name="getMOPractResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getMOPractJob">
+<wsdl:input message="ns1:getMOPractJob" name="getMOPractJob"></wsdl:input>
+<wsdl:output message="ns1:getMOPractJobResponse" name="getMOPractJobResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="createUpdateMoPract">
+<wsdl:input message="ns1:createUpdateMoPract" name="createUpdateMoPract"></wsdl:input>
+<wsdl:output message="ns1:createUpdateMoPractResponse" name="createUpdateMoPractResponse"></wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+</wsdl:definitions>

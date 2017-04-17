@@ -1,0 +1,2270 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://ws.pmp.pmp.ibs.ru/" name="PmpWs" targetNamespace="http://ws.pmp.pmp.ibs.ru/">
+<wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.pmp.pmp.ibs.ru/" xmlns:ns1="http://pmp.ibs.ru" attributeFormDefault="unqualified" elementFormDefault="unqualified" targetNamespace="http://ws.pmp.pmp.ibs.ru/">
+<xs:import namespace="http://pmp.ibs.ru"/>
+<xs:element name="FindAnswerAttachment" type="tns:findMailGwLogBeanAttachment"/>
+<xs:element name="PolyclinicCase" type="tns:polyclinicCase"/>
+<xs:element name="TapInfo" type="tns:tapInfo"/>
+<xs:element name="ToothFormula" type="tns:toothFormula"/>
+<xs:element name="changeBillStatus" type="tns:changeBillStatus"/>
+<xs:element name="changeBillStatusResponse" type="tns:changeBillStatusResponse"/>
+<xs:element name="createUpdateAmbCase" type="tns:createUpdateAmbCase"/>
+<xs:element name="createUpdateAmbCaseResponse" type="tns:createUpdateAmbCaseResponse"/>
+<xs:element name="createUpdateHospCase" type="tns:createUpdateHospCase"/>
+<xs:element name="createUpdateHospCaseResponse" type="tns:createUpdateHospCaseResponse"/>
+<xs:element name="findDocuments" type="tns:findDocuments"/>
+<xs:element name="findDocumentsResponse" type="tns:findDocumentsResponse"/>
+<xs:element name="getAmbCase" type="tns:getAmbCase"/>
+<xs:element name="getAmbCaseResponse" type="tns:getAmbCaseResponse"/>
+<xs:element name="getExpertiseFile" type="tns:getExpertiseFile"/>
+<xs:element name="getExpertiseFileResponse" type="tns:getExpertiseFileResponse"/>
+<xs:element name="getHospCase" type="tns:getHospCase"/>
+<xs:element name="getHospCaseResponse" type="tns:getHospCaseResponse"/>
+<xs:element name="getInvoicePassport" type="tns:getInvoicePassport"/>
+<xs:element name="getInvoicePassportRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="billId" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="getInvoicePassportResponse" type="tns:getInvoicePassportResponse"/>
+<xs:element name="getMailGw" type="tns:getMailGw"/>
+<xs:element name="getMailGwResponse" type="tns:getMailGwResponse"/>
+<xs:element name="getMeErrors" type="tns:getMeErrors"/>
+<xs:element name="getMeErrorsResponse" type="tns:getMeErrorsResponse"/>
+<xs:element name="getUdErrors" type="tns:getUdErrors"/>
+<xs:element name="getUdErrorsResponse" type="tns:getUdErrorsResponse"/>
+<xs:element name="getUpErrors" type="tns:getUpErrors"/>
+<xs:element name="getUpErrorsResponse" type="tns:getUpErrorsResponse"/>
+<xs:element name="getUpUdErrorBean" type="tns:getMeUpUdErrorsRequest"/>
+<xs:element name="invoicePassportResponse">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="reportData" type="xs:base64Binary"/>
+<xs:element maxOccurs="unbounded" name="errors" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="listBills" type="tns:listBills"/>
+<xs:element name="listBillsBean">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="moId" type="xs:string"/>
+<xs:element name="smoId" type="xs:string"/>
+<xs:element name="periodMonth" type="xs:int"/>
+<xs:element name="periodYear" type="xs:int"/>
+<xs:element name="useMoTree" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="listBillsResponse" type="tns:listBillsResponse"/>
+<xs:element name="listPeriods" type="tns:listPeriods"/>
+<xs:element name="listPeriodsRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="moId" type="xs:string"/>
+<xs:element name="filterFrom" type="xs:dateTime"/>
+<xs:element name="filterTo" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="listPeriodsResponse" type="tns:listPeriodsResponse"/>
+<xs:element name="removeMedCase" type="tns:removeMedCase"/>
+<xs:element name="removeMedCaseResponse" type="tns:removeMedCaseResponse"/>
+<xs:element name="searchErrors" type="tns:searchErrors"/>
+<xs:element name="searchErrorsResponse" type="tns:searchErrorsResponse"/>
+<xs:element name="sendMGFOMS" type="tns:sendMGFOMS"/>
+<xs:element name="sendMGFOMSResponse" type="tns:sendMGFOMSResponse"/>
+<xs:element name="uploadLogError" type="tns:uploadLogError"/>
+<xs:element name="uploadLogErrorAttach" type="tns:uploadLogErrorAttach"/>
+<xs:complexType name="createUpdateAmbCase">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="createUpdateAmbCaseRequest" type="tns:createUpdateAmbCaseRequestBean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="wsAuthInfo">
+<xs:sequence>
+<xs:element name="orgId" type="xs:long"/>
+<xs:element name="system" type="xs:string"/>
+<xs:element name="user" type="xs:string"/>
+<xs:element name="password" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createUpdateAmbCaseRequestBean">
+<xs:sequence>
+<xs:element minOccurs="0" name="medicalCaseDTO" type="tns:medicalCaseDTO"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="medicalCaseDTO">
+<xs:complexContent>
+<xs:extension base="tns:abstractMedicalCaseDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="canEdit" type="xs:boolean"/>
+<xs:element minOccurs="0" name="caseNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="dayHospitalDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="diagnosisAdditional" type="tns:diagnosisDTO"/>
+<xs:element minOccurs="0" name="diagnosisMain" type="tns:diagnosisDTO"/>
+<xs:element minOccurs="0" name="diseaseOutcome" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="flkErrorCodes" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="forwardDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="forwardedLpuId" type="xs:string"/>
+<xs:element minOccurs="0" name="lpuId" type="xs:string"/>
+<xs:element minOccurs="0" name="nurseJobId" type="xs:string"/>
+<xs:element minOccurs="0" name="patientType" type="xs:int"/>
+<xs:element minOccurs="0" name="paymentSource" type="xs:int"/>
+<xs:element minOccurs="0" name="servicePlace" type="xs:int"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="services" nillable="true" type="tns:simpleServiceDTO"/>
+<xs:element minOccurs="0" name="treatmentFinish" type="xs:int"/>
+<xs:element minOccurs="0" name="treatmentObjective" type="xs:int"/>
+<xs:element minOccurs="0" name="treatmentPrimary" type="xs:int"/>
+<xs:element minOccurs="0" name="visitPurpose" type="xs:int"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="abstractMedicalCaseDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="caseDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="changeDate" type="xs:long"/>
+<xs:element minOccurs="0" name="cureResult" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisSend" type="xs:string"/>
+<xs:element minOccurs="0" name="directionDoctorSpec" type="xs:string"/>
+<xs:element minOccurs="0" name="directionNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorJobId" type="xs:string"/>
+<xs:element minOccurs="0" name="hospitalizationType" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="injury" type="xs:int"/>
+<xs:element minOccurs="0" name="medCardNumber" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="medcaseDirectionDTOs" nillable="true" type="tns:medcaseDirectionDTO"/>
+<xs:element minOccurs="0" name="newbornWeightGr" type="xs:long"/>
+<xs:element minOccurs="0" name="patientId" type="xs:string"/>
+<xs:element minOccurs="0" name="policyNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="specialCase" type="xs:string"/>
+<xs:element minOccurs="0" name="targetDoctorSpec" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="diagnosisDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="code" type="xs:string"/>
+<xs:element minOccurs="0" name="diceaseNature" type="xs:string"/>
+<xs:element minOccurs="0" name="dispensary" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="simpleServiceDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="codePosobr" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="pictureURL" type="xs:string"/>
+<xs:element minOccurs="0" name="protocolURL" type="xs:string"/>
+<xs:element minOccurs="0" name="quantity" type="xs:int"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:string"/>
+<xs:element name="skipInvoice" type="xs:boolean"/>
+<xs:element minOccurs="0" name="specialCase" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="medcaseDirectionDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="diagnosisCode" type="xs:string"/>
+<xs:element minOccurs="0" name="directionDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="directionNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorSpec" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="targetDoctorSpec" type="xs:string"/>
+<xs:element minOccurs="0" name="targetLpuId" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createUpdateAmbCaseResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:result"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="result">
+<xs:sequence>
+<xs:element minOccurs="0" name="rowId" type="xs:int"/>
+<xs:element name="documentType" type="xs:string"/>
+<xs:element name="documentId" type="xs:string"/>
+<xs:element minOccurs="0" name="errors">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="error" type="tns:fault"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="warnings">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="warning" type="tns:fault"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="fault">
+<xs:sequence>
+<xs:element name="code" type="xs:string"/>
+<xs:element name="description" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getInvoicePassport">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="invoicePassportRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="billId" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getInvoicePassportResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="reportData" type="xs:base64Binary"/>
+<xs:element maxOccurs="unbounded" name="errors" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getUpErrors">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="getUpErrorRequest" type="tns:getMeUpUdErrorsRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMeUpUdErrorsRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="paging" type="tns:Paging"/>
+<xs:element minOccurs="0" name="answerId" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType final="extension restriction" name="Paging">
+<xs:sequence>
+<xs:element minOccurs="0" name="offset" type="xs:int"/>
+<xs:element minOccurs="0" name="size" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getUpErrorsResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:upErrors"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="upErrors">
+<xs:complexContent>
+<xs:extension base="tns:dtoPaging">
+<xs:sequence/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="dtoPaging">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="list" nillable="true" type="xs:anyType"/>
+<xs:element minOccurs="0" name="offset" type="xs:int"/>
+<xs:element minOccurs="0" name="size" type="xs:int"/>
+<xs:element minOccurs="0" name="totalElementsCount" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="smoUpErrorBean">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="lpuId" type="xs:int"/>
+<xs:element minOccurs="0" name="payerId" type="xs:string"/>
+<xs:element minOccurs="0" name="period" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="recId" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:int"/>
+<xs:element minOccurs="0" name="serviceCodeStr" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceSameCodeQty" type="xs:int"/>
+<xs:element minOccurs="0" name="servicesCost" type="xs:double"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getHospCase">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="getHospCaseRequest" type="tns:getHospCaseBean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getHospCaseBean">
+<xs:sequence>
+<xs:element minOccurs="0" name="filId" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getHospCaseResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:hospitalDTO"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="hospitalDTO">
+<xs:complexContent>
+<xs:extension base="tns:abstractMedicalCaseDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="canEdit" type="xs:boolean"/>
+<xs:element minOccurs="0" name="caseNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="clinicalDiagnosis" type="tns:diagnosisCardDTO"/>
+<xs:element minOccurs="0" name="cureEndDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="diagnosisReception" type="xs:string"/>
+<xs:element minOccurs="0" name="directionDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="directionLpuId" type="xs:string"/>
+<xs:element minOccurs="0" name="diseaseOutcome" type="xs:string"/>
+<xs:element minOccurs="0" name="hospAnnualType" type="xs:string"/>
+<xs:element minOccurs="0" name="interraptMs" type="xs:string"/>
+<xs:element minOccurs="0" name="moId" type="xs:string"/>
+<xs:element minOccurs="0" name="pathologicalDiagnosis" type="tns:diagnosisCardDTO"/>
+<xs:element minOccurs="0" name="patientType" type="xs:int"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="progress" nillable="true" type="tns:hospDeptStayDTO"/>
+<xs:element minOccurs="0" name="vmpNumber" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="diagnosisCardDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="accompanying" type="xs:string"/>
+<xs:element minOccurs="0" name="additional" type="xs:string"/>
+<xs:element minOccurs="0" name="death" type="xs:string"/>
+<xs:element minOccurs="0" name="main" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="hospDeptStayDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="departmentId" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisCode" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorId" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorJobId" type="xs:string"/>
+<xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="interruptCode" type="xs:string"/>
+<xs:element minOccurs="0" name="msCode" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="operations" nillable="true" type="tns:hospOperationDTO"/>
+<xs:element minOccurs="0" name="paymentSource" type="xs:string"/>
+<xs:element minOccurs="0" name="skipInvoice" type="xs:boolean"/>
+<xs:element minOccurs="0" name="specialCase" type="xs:string"/>
+<xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="hospOperationDTO">
+<xs:sequence>
+<xs:element name="anethesiaType" type="xs:int"/>
+<xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="doctorId" type="xs:long"/>
+<xs:element minOccurs="0" name="doctorJobId" type="xs:long"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="isMain" type="xs:boolean"/>
+<xs:element minOccurs="0" name="paymentSource" type="xs:int"/>
+<xs:element minOccurs="0" name="technologyType" type="xs:string"/>
+<xs:element minOccurs="0" name="useSpecCryogenic" type="xs:boolean"/>
+<xs:element minOccurs="0" name="useSpecLaser" type="xs:boolean"/>
+<xs:element minOccurs="0" name="userSpecEndoscopic" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMailGw">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="getMailGwRequest" type="tns:getMailGwRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMailGwRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="bilId" type="xs:long"/>
+<xs:element minOccurs="0" name="paging" type="tns:Paging"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMailGwResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:findMailGwLogsResponse"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="findMailGwLogsResponse">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="page" nillable="true" type="tns:findMailGwLogBean"/>
+<xs:element minOccurs="0" name="size" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="findMailGwLogBean">
+<xs:sequence>
+<xs:element minOccurs="0" name="payerAnswerInId" type="xs:long"/>
+<xs:element minOccurs="0" name="payerAnswerDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="processingDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="billId" type="xs:long"/>
+<xs:element minOccurs="0" name="versionNumber" type="xs:long"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="attachments" nillable="true" type="tns:findMailGwLogBeanAttachment"/>
+<xs:element minOccurs="0" name="meFailInvoiceSumExpert" type="xs:double"/>
+<xs:element minOccurs="0" name="mePaidSmoCost" type="xs:double"/>
+<xs:element minOccurs="0" name="mePenaltySumExpert" type="xs:double"/>
+<xs:element minOccurs="0" name="meCount" type="xs:int"/>
+<xs:element minOccurs="0" name="udServicesCost" type="xs:double"/>
+<xs:element minOccurs="0" name="udCount" type="xs:int"/>
+<xs:element minOccurs="0" name="upServicesCost" type="xs:double"/>
+<xs:element minOccurs="0" name="upCount" type="xs:int"/>
+<xs:element minOccurs="0" name="ctrlServicesCost" type="xs:double"/>
+<xs:element minOccurs="0" name="ctrlCount" type="xs:int"/>
+<xs:element minOccurs="0" name="billAmount" type="xs:double"/>
+<xs:element minOccurs="0" name="mailRequestDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="mailParseStatus" type="tns:mailStatus"/>
+<xs:element minOccurs="0" name="mailParseErrorString" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="findMailGwLogBeanAttachment">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="size" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="listBills">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="listBillsRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="moId" type="xs:string"/>
+<xs:element name="smoId" type="xs:string"/>
+<xs:element name="periodMonth" type="xs:int"/>
+<xs:element name="periodYear" type="xs:int"/>
+<xs:element name="useMoTree" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="listBillsResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:listBillsResponseDTO"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="listBillsResponseDTO">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="billInfoList" nillable="true" type="tns:billInfo"/>
+<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="billInfo">
+<xs:sequence>
+<xs:element name="billId" type="xs:string"/>
+<xs:element name="createDate" type="xs:dateTime"/>
+<xs:element name="isActive" type="xs:boolean"/>
+<xs:element name="smoId" type="xs:string"/>
+<xs:element name="moId" type="xs:string"/>
+<xs:element name="patientAmount" type="xs:int"/>
+<xs:element name="patientAttachedAmount" type="xs:int"/>
+<xs:element name="invoiceAmount" type="xs:int"/>
+<xs:element minOccurs="0" name="costTotal" type="xs:decimal"/>
+<xs:element name="costPF" type="xs:decimal"/>
+<xs:element name="decreasePF" type="xs:decimal"/>
+<xs:element minOccurs="0" name="errorCost" type="xs:decimal"/>
+<xs:element name="sentAISOMSDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="responseAISOMSDate" type="xs:dateTime"/>
+<xs:element name="status" type="xs:string"/>
+<xs:element minOccurs="0" name="details">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="details" type="tns:billDetail"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="trackId" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="billDetail">
+<xs:complexContent>
+<xs:extension base="tns:billInfo">
+<xs:sequence>
+<xs:element name="lpuId" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="changeBillStatus">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="changeBillStatusRequest" type="tns:changeBillStatusRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="changeBillStatusRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="bilId" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="changeBillStatusResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:changeBillStatusInfo"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="changeBillStatusInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="billId" type="xs:long"/>
+<xs:element minOccurs="0" name="billStatus" type="xs:string"/>
+<xs:element name="success" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="sendMGFOMS">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="sendMGFOMSRequest" type="tns:sendMGFOMSRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="sendMGFOMSRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="billId" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="sendMGFOMSResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:sendMgfomsResponse"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="sendMgfomsResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="billId" type="xs:string"/>
+<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="findDocuments">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="findDocumentsRequest" type="tns:findDocumentsRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="findDocumentsRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="filter" type="tns:CaseRequestWrapper"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CaseRequestWrapper">
+<xs:sequence>
+<xs:element minOccurs="0" name="caseFilter" type="tns:CaseFilter"/>
+<xs:element minOccurs="0" name="paging" type="tns:Paging"/>
+<xs:element minOccurs="0" name="orderSort" type="tns:OrderSort"/>
+<xs:element name="isNeedLightDto" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CaseFilter">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="period" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="dateStart" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="dateFinish" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="dateCreate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="operatorId" type="xs:long"/>
+<xs:element minOccurs="0" name="operator" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="errorTypes" nillable="true" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="serviceCodes" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceCodeStart" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceCodeEnd" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="diagnosis" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisStart" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisEnd" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="diagnosisTypes" nillable="true" type="xs:int"/>
+<xs:element minOccurs="0" name="systemSource" type="ns1:systemSource"/>
+<xs:element minOccurs="0" name="billId" type="xs:long"/>
+<xs:element minOccurs="0" name="requirementId" type="xs:long"/>
+<xs:element minOccurs="0" name="status" type="ns1:status"/>
+<xs:element minOccurs="0" name="practitionerId" type="xs:string"/>
+<xs:element minOccurs="0" name="nurseId" type="xs:string"/>
+<xs:element minOccurs="0" name="snils" type="xs:string"/>
+<xs:element minOccurs="0" name="cardNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="caseNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="patientFio" type="xs:string"/>
+<xs:element minOccurs="0" name="ogrn" type="xs:string"/>
+<xs:element minOccurs="0" name="paymentSource" type="xs:int"/>
+<xs:element minOccurs="0" name="patientFilter" type="tns:patientFilter"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="patientIds" nillable="true" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="patientTypes" nillable="true" type="tns:patientType"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="cureResults" nillable="true" type="xs:int"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="lpuIds" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="smoId" type="xs:string"/>
+<xs:element minOccurs="0" name="residentMsk" type="xs:boolean"/>
+<xs:element name="fetchPatientInfo" type="xs:boolean"/>
+<xs:element name="fetchPractitionerInfo" type="xs:boolean"/>
+<xs:element name="emptyDoctor" type="xs:boolean"/>
+<xs:element name="emptyNurse" type="xs:boolean"/>
+<xs:element minOccurs="0" name="jobDoctorId" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorId" type="xs:string"/>
+<xs:element minOccurs="0" name="jobNurseId" type="xs:string"/>
+<xs:element minOccurs="0" name="templateType" type="xs:string"/>
+<xs:element name="today" type="xs:boolean"/>
+<xs:element minOccurs="0" name="departmentCode" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="departmentCodeList" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="caseType" type="xs:string"/>
+<xs:element minOccurs="0" name="mscodeStart" type="xs:string"/>
+<xs:element minOccurs="0" name="mscodeEnd" type="xs:string"/>
+<xs:element name="serviceExpired" type="xs:boolean"/>
+<xs:element minOccurs="0" name="codePosobrStart" type="xs:string"/>
+<xs:element minOccurs="0" name="codePosobrEnd" type="xs:string"/>
+<xs:element minOccurs="0" name="directionLpuId" type="xs:long"/>
+<xs:element minOccurs="0" name="directionDoctorSpec" type="xs:string"/>
+<xs:element minOccurs="0" name="directionDiagnosis" type="xs:string"/>
+<xs:element minOccurs="0" name="directionNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="targetLpuId" type="xs:long"/>
+<xs:element minOccurs="0" name="targetDoctorSpec" type="xs:string"/>
+<xs:element minOccurs="0" name="targetDiagnosisCode" type="xs:string"/>
+<xs:element minOccurs="0" name="targetDirectionNumber" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="patientFilter">
+<xs:sequence>
+<xs:element minOccurs="0" name="birthday" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="firstName" type="xs:string"/>
+<xs:element minOccurs="0" name="lastName" type="xs:string"/>
+<xs:element minOccurs="0" name="middleName" type="xs:string"/>
+<xs:element minOccurs="0" name="omsNumber" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="OrderSort">
+<xs:sequence>
+<xs:element minOccurs="0" name="fieldName" type="xs:string"/>
+<xs:element name="desc" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="findDocumentsResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:findedDocuments"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="findedDocuments">
+<xs:sequence>
+<xs:element minOccurs="0" name="documentEntryList" type="tns:Page"/>
+<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Page">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="list" nillable="true" type="xs:anyType"/>
+<xs:element name="total" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="tapInfo">
+<xs:complexContent>
+<xs:extension base="ns1:MedicalCase">
+<xs:sequence>
+<xs:element minOccurs="0" name="servicePlace" type="xs:int"/>
+<xs:element minOccurs="0" name="visitPurpose" type="xs:int"/>
+<xs:element minOccurs="0" name="nurseId" type="xs:long"/>
+<xs:element minOccurs="0" name="diseaseOutcome" type="xs:int"/>
+<xs:element minOccurs="0" name="nurseJobId" type="xs:long"/>
+<xs:element minOccurs="0" name="treatmentObjective" type="xs:int"/>
+<xs:element minOccurs="0" name="treatmentFinish" type="xs:int"/>
+<xs:element minOccurs="0" name="treatmentPrimary" type="xs:int"/>
+<xs:element minOccurs="0" name="nurseFio" type="xs:string"/>
+<xs:element minOccurs="0" name="nurseTabelNumber" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="checkServiceError">
+<xs:complexContent>
+<xs:extension base="tns:checkError">
+<xs:sequence/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="checkError">
+<xs:complexContent>
+<xs:extension base="ns1:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="checkCode" type="xs:string"/>
+<xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="changeDate" type="xs:dateTime"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="hospDeptStay">
+<xs:complexContent>
+<xs:extension base="ns1:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="hospCaseId" type="xs:long"/>
+<xs:element minOccurs="0" name="doctorId" type="xs:long"/>
+<xs:element minOccurs="0" name="doctorJobId" type="xs:long"/>
+<xs:element minOccurs="0" name="departamentId" type="xs:long"/>
+<xs:element minOccurs="0" name="diagnosisCode" type="xs:string"/>
+<xs:element minOccurs="0" name="msCode" type="xs:string"/>
+<xs:element minOccurs="0" name="interRuptCode" type="xs:string"/>
+<xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="paymentSource" type="xs:int"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="hospOperations" nillable="true" type="tns:hospOperation"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="costs" nillable="true" type="ns1:Cost"/>
+<xs:element minOccurs="0" name="kdFact" type="xs:int"/>
+<xs:element minOccurs="0" name="invoiceLifecycle" type="ns1:InvoiceLifecycle"/>
+<xs:element minOccurs="0" name="specialCase" type="xs:string"/>
+<xs:element minOccurs="0" name="skipInvoice" type="xs:boolean"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="errors" nillable="true" type="tns:checkHospDeptStayError"/>
+<xs:element minOccurs="0" name="dayStKrat" type="xs:int"/>
+<xs:element minOccurs="0" name="msCodeType" type="tns:msCODETYPE"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="hospOperation">
+<xs:complexContent>
+<xs:extension base="ns1:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="doctorId" type="xs:long"/>
+<xs:element minOccurs="0" name="doctorJobId" type="xs:long"/>
+<xs:element minOccurs="0" name="anesthesiaType" type="xs:int"/>
+<xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="paymentSource" type="xs:int"/>
+<xs:element minOccurs="0" name="technologyType" type="xs:string"/>
+<xs:element minOccurs="0" name="isOperationMain" type="xs:boolean"/>
+<xs:element minOccurs="0" name="useSpecLaser" type="xs:int"/>
+<xs:element minOccurs="0" name="useSpecEndoscopic" type="xs:int"/>
+<xs:element minOccurs="0" name="useSpecCryogenic" type="xs:int"/>
+<xs:element minOccurs="0" name="departamentId" type="xs:long"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="checkHospDeptStayError">
+<xs:complexContent>
+<xs:extension base="tns:checkError">
+<xs:sequence/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="toothFormula">
+<xs:complexContent>
+<xs:extension base="ns1:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="toothNumber" type="xs:int"/>
+<xs:element minOccurs="0" name="o" type="xs:int"/>
+<xs:element minOccurs="0" name="m" type="xs:int"/>
+<xs:element minOccurs="0" name="d" type="xs:int"/>
+<xs:element minOccurs="0" name="v" type="xs:int"/>
+<xs:element minOccurs="0" name="l" type="xs:int"/>
+<xs:element minOccurs="0" name="p" type="xs:int"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="checkCaseError">
+<xs:complexContent>
+<xs:extension base="tns:checkError">
+<xs:sequence>
+<xs:element minOccurs="0" name="medicalCaseId" type="xs:long"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="medcaseDirection">
+<xs:complexContent>
+<xs:extension base="ns1:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="directionNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="directionDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="diagnosisCode" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorSpec" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisName" type="xs:string"/>
+<xs:element minOccurs="0" name="targetLpuId" type="xs:long"/>
+<xs:element minOccurs="0" name="targetDoctorSpec" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="tapInfoInfo">
+<xs:complexContent>
+<xs:extension base="tns:commonReportDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="authorId" type="xs:string"/>
+<xs:element minOccurs="0" name="cardNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="caseDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="caseType" type="xs:string"/>
+<xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="cureResult" type="xs:int"/>
+<xs:element minOccurs="0" name="departmentCode" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosis11" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosis21" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosis99" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorId" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorJobId" type="xs:string"/>
+<xs:element minOccurs="0" name="editorId" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="errorCodeList" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="forwardedLpuId" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="lpuId" type="xs:string"/>
+<xs:element minOccurs="0" name="nurseJobId" type="xs:string"/>
+<xs:element minOccurs="0" name="originCode" type="xs:string"/>
+<xs:element minOccurs="0" name="paymentSource" type="xs:int"/>
+<xs:element minOccurs="0" name="practFIO" type="xs:string"/>
+<xs:element minOccurs="0" name="practPosition" type="xs:long"/>
+<xs:element minOccurs="0" name="primaryDiagnosis" type="xs:string"/>
+<xs:element minOccurs="0" name="residence" type="xs:int"/>
+<xs:element minOccurs="0" name="secondaryDiagnosis" type="xs:string"/>
+<xs:element minOccurs="0" name="servicePlace" type="xs:int"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="services" nillable="true" type="tns:tapServiceInfo"/>
+<xs:element minOccurs="0" name="sum" type="xs:decimal"/>
+<xs:element minOccurs="0" name="sumErrors" type="xs:decimal"/>
+<xs:element minOccurs="0" name="updated" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="visitPurpose" type="xs:int"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="commonReportDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="patientId" type="xs:string"/>
+<xs:element minOccurs="0" name="patientType" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="tapServiceInfo">
+<xs:sequence>
+<xs:element name="diagnosisType" type="xs:int"/>
+<xs:element name="quantity" type="xs:int"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceName" type="xs:string"/>
+<xs:element minOccurs="0" name="specialCase" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ErrorResponseWrapper">
+<xs:sequence>
+<xs:element minOccurs="0" name="tapId" type="xs:long"/>
+<xs:element minOccurs="0" name="invoiceId" type="xs:long"/>
+<xs:element minOccurs="0" name="patientId" type="xs:string"/>
+<xs:element minOccurs="0" name="patientFio" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceId" type="xs:long"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:int"/>
+<xs:element name="skipInvoice" type="xs:boolean"/>
+<xs:element minOccurs="0" name="amount" type="xs:double"/>
+<xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="errors" nillable="true" type="tns:CaseCheckErrorInfo"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="CaseCheckErrorInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="code" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="RevisionEntityInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="author" type="xs:string"/>
+<xs:element minOccurs="0" name="current" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="polyclinicCase">
+<xs:complexContent>
+<xs:extension base="ns1:MedicalCase">
+<xs:sequence>
+<xs:element minOccurs="0" name="ksg" type="xs:int"/>
+<xs:element minOccurs="0" name="profOms" type="xs:string"/>
+<xs:element minOccurs="0" name="consumables">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="consumable" type="tns:polyclinicConsumable"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="medicines">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="medicine" type="tns:polyclinicMedicine"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="polyclinicConsumable">
+<xs:complexContent>
+<xs:extension base="tns:abstractConsumable">
+<xs:sequence/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="abstractConsumable">
+<xs:complexContent>
+<xs:extension base="ns1:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="diagnosisCode" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisName" type="xs:string"/>
+<xs:element minOccurs="0" name="consumableCode" type="xs:string"/>
+<xs:element minOccurs="0" name="consumableName" type="xs:string"/>
+<xs:element minOccurs="0" name="amount" type="xs:decimal"/>
+<xs:element minOccurs="0" name="doctorSnils" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorId" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorName" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorSpec" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorSpecName" type="xs:string"/>
+<xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="endDate" type="xs:dateTime"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="polyclinicMedicine">
+<xs:complexContent>
+<xs:extension base="tns:abstractMedicine">
+<xs:sequence/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="abstractMedicine">
+<xs:complexContent>
+<xs:extension base="ns1:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="code" type="xs:int"/>
+<xs:element minOccurs="0" name="diagnosisCode" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisName" type="xs:string"/>
+<xs:element minOccurs="0" name="doses" type="xs:decimal"/>
+<xs:element minOccurs="0" name="doctorId" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorSpec" type="xs:string"/>
+<xs:element minOccurs="0" name="dateBegin" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="dateEnd" type="xs:dateTime"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="InvoiceInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="serviceId" type="xs:long"/>
+<xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="sum" type="xs:double"/>
+<xs:element minOccurs="0" name="status" type="ns1:invoiceStatus"/>
+<xs:element name="active" type="xs:boolean"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="errors" nillable="true" type="tns:CaseCheckErrorInfo"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="MedicalCaseInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="caseDate" type="xs:dateTime"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="patient" nillable="true" type="tns:patientInfo"/>
+<xs:element minOccurs="0" name="specialistFio" type="xs:string"/>
+<xs:element minOccurs="0" name="specialistShortFio" type="xs:string"/>
+<xs:element minOccurs="0" name="amount" type="xs:double"/>
+<xs:element minOccurs="0" name="cardNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="errorAmount" type="xs:double"/>
+<xs:element minOccurs="0" name="diagnosis" type="xs:string"/>
+<xs:element minOccurs="0" name="additionalDiagnosis" type="xs:string"/>
+<xs:element minOccurs="0" name="specialistId" type="xs:string"/>
+<xs:element minOccurs="0" name="nurseId" type="xs:string"/>
+<xs:element minOccurs="0" name="nurseTableNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="nurseFio" type="xs:string"/>
+<xs:element minOccurs="0" name="nurseShortFio" type="xs:string"/>
+<xs:element minOccurs="0" name="tabelNumber" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="simpleServiceInfoList" nillable="true" type="tns:SimpleServiceInfo"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="errors" nillable="true" type="xs:string"/>
+<xs:element minOccurs="0" name="simpleServicesCount" type="xs:int"/>
+<xs:element minOccurs="0" name="systemSource" type="xs:string"/>
+<xs:element minOccurs="0" name="forwardedLpuId" type="xs:string"/>
+<xs:element minOccurs="0" name="operator" type="xs:string"/>
+<xs:element minOccurs="0" name="dayHospitalDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="canEdit" type="xs:boolean"/>
+<xs:element minOccurs="0" name="patientType" type="xs:int"/>
+<xs:element minOccurs="0" name="caseType" type="xs:string"/>
+<xs:element minOccurs="0" name="paymentSource" type="xs:int"/>
+<xs:element minOccurs="0" name="filId" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="diagnosisList" nillable="true" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="patientInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="birthDate" type="xs:string"/>
+<xs:element minOccurs="0" name="patientAddress" type="xs:string"/>
+<xs:element minOccurs="0" name="patientFio" type="xs:string"/>
+<xs:element minOccurs="0" name="patientPolicy" type="xs:string"/>
+<xs:element minOccurs="0" name="patientShortFio" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="SimpleServiceInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="dbId" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:string"/>
+<xs:element minOccurs="0" name="quantity" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceName" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisType" type="xs:string"/>
+<xs:element minOccurs="0" name="specialCase" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="reportInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="acccountant" type="xs:string"/>
+<xs:element minOccurs="0" name="chief" type="xs:string"/>
+<xs:element minOccurs="0" name="finishGenerateDate" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:string"/>
+<xs:element minOccurs="0" name="moId" type="xs:string"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="startGenerateDate" type="xs:string"/>
+<xs:element minOccurs="0" name="statistic" type="xs:string"/>
+<xs:element minOccurs="0" name="status" type="tns:reportInfoStatus"/>
+<xs:element minOccurs="0" name="type" type="tns:reportType"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="ctrlError">
+<xs:complexContent>
+<xs:extension base="ns1:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="response" type="tns:mailGwLogEntry"/>
+<xs:element minOccurs="0" name="payerId" type="xs:string"/>
+<xs:element minOccurs="0" name="period" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="lpuId" type="xs:int"/>
+<xs:element minOccurs="0" name="filId" type="xs:int"/>
+<xs:element minOccurs="0" name="fileName" type="xs:string"/>
+<xs:element minOccurs="0" name="recId" type="xs:string"/>
+<xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+<xs:element minOccurs="0" name="ctrlStage" type="tns:ctrlStage"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:int"/>
+<xs:element minOccurs="0" name="serviceQty" type="xs:int"/>
+<xs:element minOccurs="0" name="interruptionType" type="xs:string"/>
+<xs:element minOccurs="0" name="refReason" type="xs:string"/>
+<xs:element minOccurs="0" name="expertiseStage" type="xs:int"/>
+<xs:element minOccurs="0" name="rejectGround" type="xs:string"/>
+<xs:element minOccurs="0" name="errorCodeName" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceCodeName" type="xs:string"/>
+<xs:element minOccurs="0" name="filName" type="xs:string"/>
+<xs:element minOccurs="0" name="amount" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="mailGwLogEntry">
+<xs:complexContent>
+<xs:extension base="ns1:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="userUid" type="xs:string"/>
+<xs:element minOccurs="0" name="direction" type="tns:direction"/>
+<xs:element minOccurs="0" name="parcelType" type="tns:parcelType"/>
+<xs:element minOccurs="0" name="parent" type="tns:mailGwLogEntry"/>
+<xs:element minOccurs="0" name="processingDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="externalId" type="xs:string"/>
+<xs:element minOccurs="0" name="correlationId" type="xs:string"/>
+<xs:element minOccurs="0" name="from" type="xs:string"/>
+<xs:element minOccurs="0" name="to" type="xs:string"/>
+<xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="subject" type="xs:string"/>
+<xs:element minOccurs="0" name="billId" type="ns1:Bill"/>
+<xs:element minOccurs="0" name="status" type="tns:mailStatus"/>
+<xs:element minOccurs="0" name="fromMo" type="xs:string"/>
+<xs:element minOccurs="0" name="toMo" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="meErrorList" nillable="true" type="tns:meError"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="udErrorList" nillable="true" type="tns:udError"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="upErrorList" nillable="true" type="tns:upError"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="ctrlErrorList" nillable="true" type="tns:ctrlError"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="uploadErrorList" nillable="true" type="tns:uploadLogError"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="meError">
+<xs:complexContent>
+<xs:extension base="ns1:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="response" type="tns:mailGwLogEntry"/>
+<xs:element minOccurs="0" name="payerId" type="xs:string"/>
+<xs:element minOccurs="0" name="period" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="lpuId" type="xs:int"/>
+<xs:element minOccurs="0" name="filId" type="xs:int"/>
+<xs:element minOccurs="0" name="recId" type="xs:string"/>
+<xs:element minOccurs="0" name="periodStr" type="xs:string"/>
+<xs:element minOccurs="0" name="periodE" type="xs:string"/>
+<xs:element minOccurs="0" name="document" type="xs:string"/>
+<xs:element minOccurs="0" name="attachLpuId" type="xs:int"/>
+<xs:element minOccurs="0" name="cardNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisCode" type="xs:string"/>
+<xs:element minOccurs="0" name="interruptionType" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="executionServiceCode" type="xs:string"/>
+<xs:element minOccurs="0" name="executionServiceSpecialization" type="xs:int"/>
+<xs:element minOccurs="0" name="departmentCode" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:int"/>
+<xs:element minOccurs="0" name="surgeryCode" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceSameCodeQty" type="xs:int"/>
+<xs:element minOccurs="0" name="infantProfile" type="xs:int"/>
+<xs:element minOccurs="0" name="fundingArrangements" type="xs:string"/>
+<xs:element minOccurs="0" name="specialCase" type="xs:string"/>
+<xs:element minOccurs="0" name="paidSmoCost" type="xs:double"/>
+<xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+<xs:element minOccurs="0" name="expertiseStage" type="xs:string"/>
+<xs:element minOccurs="0" name="rejectGround" type="xs:string"/>
+<xs:element minOccurs="0" name="primaryDiagnosisCode" type="xs:string"/>
+<xs:element minOccurs="0" name="interruptionAccountingType" type="xs:string"/>
+<xs:element minOccurs="0" name="expertiseApplyServiceCode" type="xs:int"/>
+<xs:element minOccurs="0" name="expertiseApplySurgeryCode" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceQty" type="xs:int"/>
+<xs:element minOccurs="0" name="failInvoiceSumExpert" type="xs:double"/>
+<xs:element minOccurs="0" name="penaltySumExpert" type="xs:double"/>
+<xs:element minOccurs="0" name="actId" type="xs:string"/>
+<xs:element minOccurs="0" name="actDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="expert" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="udError">
+<xs:complexContent>
+<xs:extension base="ns1:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="response" type="tns:mailGwLogEntry"/>
+<xs:element minOccurs="0" name="payerId" type="xs:string"/>
+<xs:element minOccurs="0" name="period" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="periodStr" type="xs:string"/>
+<xs:element minOccurs="0" name="lpuId" type="xs:int"/>
+<xs:element minOccurs="0" name="recId" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:int"/>
+<xs:element minOccurs="0" name="serviceSameCodeQty" type="xs:int"/>
+<xs:element minOccurs="0" name="servicesCost" type="xs:double"/>
+<xs:element minOccurs="0" name="vz" type="xs:int"/>
+<xs:element minOccurs="0" name="errorMsg" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="upError">
+<xs:complexContent>
+<xs:extension base="ns1:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="response" type="tns:mailGwLogEntry"/>
+<xs:element minOccurs="0" name="payerId" type="xs:string"/>
+<xs:element minOccurs="0" name="period" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="periodStr" type="xs:string"/>
+<xs:element minOccurs="0" name="lpuId" type="xs:int"/>
+<xs:element minOccurs="0" name="recId" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:int"/>
+<xs:element minOccurs="0" name="serviceSameCodeQty" type="xs:int"/>
+<xs:element minOccurs="0" name="servicesCost" type="xs:double"/>
+<xs:element minOccurs="0" name="errorMsg" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="uploadLogError">
+<xs:complexContent>
+<xs:extension base="ns1:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="userName" type="xs:string"/>
+<xs:element minOccurs="0" name="orgId" type="xs:int"/>
+<xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="operationCode" type="xs:int"/>
+<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+<xs:element minOccurs="0" name="errorText" type="xs:string"/>
+<xs:element minOccurs="0" name="message" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="uploadLogErrorAttachList" nillable="true" type="tns:uploadLogErrorAttach"/>
+<xs:element minOccurs="0" name="mailResponse" type="tns:mailGwLogEntry"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="uploadLogErrorAttach">
+<xs:sequence>
+<xs:element minOccurs="0" name="fileName" type="xs:string"/>
+<xs:element minOccurs="0" name="fk" type="tns:uploadLogError"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="practitionerReportTapInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="jobId" type="xs:string"/>
+<xs:element minOccurs="0" name="servicesCount" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="tapInfoReport14DsDTO">
+<xs:complexContent>
+<xs:extension base="tns:commonReportDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="cureResult" type="xs:int"/>
+<xs:element minOccurs="0" name="primaryDiagnosis" type="xs:string"/>
+<xs:element minOccurs="0" name="residence" type="xs:int"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="services" nillable="true" type="tns:tapServiceInfo"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="errorInfo">
+<xs:sequence>
+<xs:element minOccurs="0" name="code" type="xs:string"/>
+<xs:element name="count" type="xs:int"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="serviceErrorModel">
+<xs:sequence>
+<xs:element minOccurs="0" name="cureResult" type="xs:int"/>
+<xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="diagnosisCode" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisName" type="xs:string"/>
+<xs:element minOccurs="0" name="diseaseOutcome" type="xs:int"/>
+<xs:element minOccurs="0" name="documentType" type="xs:string"/>
+<xs:element name="editable" type="xs:boolean"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="errorCodes" nillable="true" type="tns:errorCodeDTO"/>
+<xs:element minOccurs="0" name="executor" type="tns:practitionerExpertise"/>
+<xs:element minOccurs="0" name="expertiseStage" type="xs:string"/>
+<xs:element minOccurs="0" name="fileName" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element name="isEditable" type="xs:boolean"/>
+<xs:element name="isSkippedFromInvoice" type="xs:boolean"/>
+<xs:element minOccurs="0" name="lpuId" type="xs:string"/>
+<xs:element minOccurs="0" name="lpuName" type="xs:string"/>
+<xs:element minOccurs="0" name="medicalCaseId" type="xs:long"/>
+<xs:element minOccurs="0" name="patient" type="tns:patientExpertise"/>
+<xs:element minOccurs="0" name="recId" type="xs:string"/>
+<xs:element minOccurs="0" name="responseId" type="xs:long"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceCost" type="xs:int"/>
+<xs:element minOccurs="0" name="serviceName" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceQuantity" type="xs:int"/>
+<xs:element name="skippedFromInvoice" type="xs:boolean"/>
+<xs:element minOccurs="0" name="specialCase" type="xs:string"/>
+<xs:element minOccurs="0" name="specialCaseName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="errorCodeDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="code" type="xs:string"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="practitionerExpertise">
+<xs:sequence>
+<xs:element minOccurs="0" name="department" type="xs:string"/>
+<xs:element minOccurs="0" name="fio" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:string"/>
+<xs:element minOccurs="0" name="jobId" type="xs:string"/>
+<xs:element minOccurs="0" name="position" type="xs:string"/>
+<xs:element minOccurs="0" name="tapCode" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="patientExpertise">
+<xs:sequence>
+<xs:element minOccurs="0" name="birthday" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="fio" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:string"/>
+<xs:element minOccurs="0" name="patientType" type="tns:patientType"/>
+<xs:element minOccurs="0" name="policyNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="sex" type="xs:string"/>
+<xs:element minOccurs="0" name="shortName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="MessageWrapper">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:string"/>
+<xs:element minOccurs="0" name="mailMessageId" type="xs:string"/>
+<xs:element minOccurs="0" name="correlationId" type="xs:string"/>
+<xs:element minOccurs="0" name="to" type="xs:string"/>
+<xs:element minOccurs="0" name="from" type="xs:string"/>
+<xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="subject" type="xs:string"/>
+<xs:element minOccurs="0" name="content" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="attachments" nillable="true" type="tns:AttachmentWrapper"/>
+<xs:element name="attachmentPaths">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="entry">
+<xs:complexType>
+<xs:sequence>
+<xs:element minOccurs="0" name="key" type="xs:string"/>
+<xs:element minOccurs="0" name="value" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element name="forceSend" type="xs:boolean"/>
+<xs:element minOccurs="0" name="currentLpuId" type="xs:string"/>
+<xs:element minOccurs="0" name="currentUserName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="AttachmentWrapper">
+<xs:sequence>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="payload" type="xs:base64Binary"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getExpertiseFile">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="findExpertiseFileRequest" type="tns:findExpertiseFileRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="findExpertiseFileRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="payerAnswerInId" type="xs:long"/>
+<xs:element minOccurs="0" name="fileName" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getExpertiseFileResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:findExpertiseFileResponse"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="findExpertiseFileResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="expertiseFileBean" type="tns:expertiseFileBean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="expertiseFileBean">
+<xs:sequence>
+<xs:element minOccurs="0" name="fileData" type="xs:base64Binary"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="message" type="xs:string"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMeErrors">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="getMeErrorRequest" type="tns:getMeUpUdErrorsRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMeErrorsResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:meErrors"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="meErrors">
+<xs:complexContent>
+<xs:extension base="tns:dtoPaging">
+<xs:sequence/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="smoMeErrorBean">
+<xs:sequence>
+<xs:element minOccurs="0" name="actDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="actId" type="xs:string"/>
+<xs:element minOccurs="0" name="attachLpuId" type="xs:int"/>
+<xs:element minOccurs="0" name="cardNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="departmentCode" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisCode" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisCodeStr" type="xs:string"/>
+<xs:element minOccurs="0" name="document" type="xs:string"/>
+<xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+<xs:element minOccurs="0" name="executionServiceCode" type="xs:string"/>
+<xs:element minOccurs="0" name="executionServiceSpecialization" type="xs:int"/>
+<xs:element minOccurs="0" name="expertiseApplyServiceCode" type="xs:int"/>
+<xs:element minOccurs="0" name="expertiseApplyServiceCodeStr" type="xs:string"/>
+<xs:element minOccurs="0" name="expertiseApplySurgeryCode" type="xs:string"/>
+<xs:element minOccurs="0" name="expertiseApplySurgeryCodeStr" type="xs:string"/>
+<xs:element minOccurs="0" name="expertiseStage" type="xs:string"/>
+<xs:element minOccurs="0" name="failInvoiceSumExpert" type="xs:double"/>
+<xs:element minOccurs="0" name="filId" type="xs:int"/>
+<xs:element minOccurs="0" name="fundingArrangements" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="infantProfile" type="xs:int"/>
+<xs:element minOccurs="0" name="interruptionAccountingType" type="xs:string"/>
+<xs:element minOccurs="0" name="interruptionType" type="xs:string"/>
+<xs:element minOccurs="0" name="lpuId" type="xs:int"/>
+<xs:element minOccurs="0" name="paidSmoCost" type="xs:double"/>
+<xs:element minOccurs="0" name="patient" type="tns:patientExpertise"/>
+<xs:element minOccurs="0" name="payerId" type="xs:string"/>
+<xs:element minOccurs="0" name="penaltySumExpert" type="xs:double"/>
+<xs:element minOccurs="0" name="period" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="periodE" type="xs:string"/>
+<xs:element minOccurs="0" name="periodStr" type="xs:string"/>
+<xs:element minOccurs="0" name="primaryDiagnosisCode" type="xs:string"/>
+<xs:element minOccurs="0" name="primaryDiagnosisCodeStr" type="xs:string"/>
+<xs:element minOccurs="0" name="recId" type="xs:string"/>
+<xs:element minOccurs="0" name="rejectGround" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:int"/>
+<xs:element minOccurs="0" name="serviceCodeStr" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="serviceQty" type="xs:int"/>
+<xs:element minOccurs="0" name="serviceSameCodeQty" type="xs:int"/>
+<xs:element minOccurs="0" name="specialCase" type="xs:string"/>
+<xs:element minOccurs="0" name="surgeryCode" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="listPeriods">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="listPeriodsRequest">
+<xs:complexType>
+<xs:sequence>
+<xs:element name="moId" type="xs:string"/>
+<xs:element name="filterFrom" type="xs:dateTime"/>
+<xs:element name="filterTo" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="listPeriodsResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:accountingPeriods"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="accountingPeriods">
+<xs:sequence>
+<xs:element minOccurs="0" name="errorCode" type="xs:int"/>
+<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="items" nillable="true" type="tns:pmpAccountingPeriod"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="pmpAccountingPeriod">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:string"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="startDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="finishDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="status" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAmbCase">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="getAmbCaseRequest" type="tns:getAmbCaseBean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAmbCaseBean">
+<xs:sequence>
+<xs:element minOccurs="0" name="filId" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getAmbCaseResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:medicalCaseDTO"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createUpdateHospCase">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="createUpdateHospCaseRequest" type="tns:createUpdateHospCaseRequestBean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createUpdateHospCaseRequestBean">
+<xs:sequence>
+<xs:element minOccurs="0" name="hospitalDTO" type="tns:hospitalDTO"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createUpdateHospCaseResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:result"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getUdErrors">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="getUdErrorRequest" type="tns:getMeUpUdErrorsRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getUdErrorsResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:udErrors"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="udErrors">
+<xs:complexContent>
+<xs:extension base="tns:dtoPaging">
+<xs:sequence/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="smoUdErrorBean">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="lpuId" type="xs:int"/>
+<xs:element minOccurs="0" name="payerId" type="xs:string"/>
+<xs:element minOccurs="0" name="period" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="recId" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:int"/>
+<xs:element minOccurs="0" name="serviceCodeStr" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceSameCodeQty" type="xs:int"/>
+<xs:element minOccurs="0" name="servicesCost" type="xs:double"/>
+<xs:element minOccurs="0" name="vz" type="xs:int"/>
+<xs:element minOccurs="0" name="vzStr" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="removeMedCase">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="deleteTapRequest" type="tns:deleteEntity"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteEntity">
+<xs:sequence>
+<xs:element name="id" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="removeMedCaseResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:BooleanWrapper"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="BooleanWrapper">
+<xs:sequence>
+<xs:element minOccurs="0" name="value" type="xs:boolean"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="searchErrors">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="getMekErrorsRequest" type="tns:getMekErrorsRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMekErrorsRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="answerId" type="xs:long"/>
+<xs:element minOccurs="0" name="paging" type="tns:Paging"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="searchErrorsResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:mekErrors"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="mekErrors">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="items" nillable="true" type="tns:mekError"/>
+<xs:element minOccurs="0" name="total" type="xs:int"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="mekError">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="serviceQuantity" type="xs:int"/>
+<xs:element minOccurs="0" name="serviceCost" type="xs:int"/>
+<xs:element minOccurs="0" name="patient" type="tns:patientExpertise"/>
+<xs:element minOccurs="0" name="executorId" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisCode" type="xs:string"/>
+<xs:element minOccurs="0" name="diagnosisName" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:string"/>
+<xs:element minOccurs="0" name="serviceName" type="xs:string"/>
+<xs:element minOccurs="0" name="cureResult" type="xs:int"/>
+<xs:element minOccurs="0" name="diseaseOutcome" type="xs:int"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="errorCodes" nillable="true" type="tns:errorCodeDTO"/>
+<xs:element minOccurs="0" name="specialCase" type="xs:string"/>
+<xs:element minOccurs="0" name="specialCaseName" type="xs:string"/>
+<xs:element minOccurs="0" name="medicalCaseId" type="xs:long"/>
+<xs:element minOccurs="0" name="expertiseStage" type="xs:string"/>
+<xs:element minOccurs="0" name="documentType" type="xs:string"/>
+<xs:element minOccurs="0" name="answerId" type="xs:long"/>
+<xs:element minOccurs="0" name="recId" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="mailStatus">
+<xs:restriction base="xs:string">
+<xs:enumeration value="OK"/>
+<xs:enumeration value="ERROR"/>
+<xs:enumeration value="DELETED"/>
+<xs:enumeration value="IGNORED"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="patientType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="INSURED"/>
+<xs:enumeration value="NONRESIDENT"/>
+<xs:enumeration value="NEWBORN"/>
+<xs:enumeration value="UNKNOWN"/>
+<xs:enumeration value="CONTRACTOR"/>
+<xs:enumeration value="SHI"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="msCODETYPE">
+<xs:restriction base="xs:string">
+<xs:enumeration value="REESMS"/>
+<xs:enumeration value="REESUS"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="reportInfoStatus">
+<xs:restriction base="xs:string">
+<xs:enumeration value="PROCESSED"/>
+<xs:enumeration value="FAIL"/>
+<xs:enumeration value="OK"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="reportType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="TYPE_1"/>
+<xs:enumeration value="TYPE_2"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="direction">
+<xs:restriction base="xs:string">
+<xs:enumeration value="IN"/>
+<xs:enumeration value="OUT"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="parcelType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="REPORT_IN_SMO"/>
+<xs:enumeration value="REPORT_IN_MGFOMS"/>
+<xs:enumeration value="REPORT_SMO_IN_MO"/>
+<xs:enumeration value="REPORT_MGFOMS_IN_MO"/>
+<xs:enumeration value="REPORT_SMO_IN_MGFOMS"/>
+<xs:enumeration value="ATTACHMENTS_REPORT_MO_TO_SMO"/>
+<xs:enumeration value="ATTACHMENTS_REPORT_SMO_TO_MO"/>
+<xs:enumeration value="ERZ_VERIFICATION_REQUEST"/>
+<xs:enumeration value="ERZ_VERIFICATION_RESPONSE"/>
+<xs:enumeration value="CLINICAL_EXAMINATION_REQUEST"/>
+<xs:enumeration value="CLINICAL_EXAMINATION_RESPONSE"/>
+<xs:enumeration value="NONREGISTERED"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="ctrlStage">
+<xs:restriction base="xs:string">
+<xs:enumeration value="A"/>
+<xs:enumeration value="E"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:element name="Exception" type="tns:Exception"/>
+<xs:complexType name="Exception">
+<xs:sequence>
+<xs:element minOccurs="0" name="message" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+</xs:schema>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://pmp.ibs.ru" xmlns:ns1="http://ws.pmp.pmp.ibs.ru/" elementFormDefault="qualified" targetNamespace="http://pmp.ibs.ru" version="1.0">
+<xs:import namespace="http://ws.pmp.pmp.ibs.ru/"/>
+<xs:element name="Diagnosis" type="tns:diagnosis"/>
+<xs:element name="Invoice" type="tns:invoice"/>
+<xs:element name="billAttachment" type="tns:billAttachment"/>
+<xs:element name="billErrorLog" type="tns:billErrorLog"/>
+<xs:element name="billParcel" type="tns:billParcel"/>
+<xs:complexType name="MedicalCase">
+<xs:complexContent>
+<xs:extension base="tns:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="caseType" type="tns:caseType"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="lpuId" type="xs:long"/>
+<xs:element minOccurs="0" name="departmentCode" type="xs:long"/>
+<xs:element minOccurs="0" name="status" type="tns:status"/>
+<xs:element minOccurs="0" name="statusChangeDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="caseNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="caseDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="patientId" type="xs:string"/>
+<xs:element minOccurs="0" name="medCardNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorId" type="xs:long"/>
+<xs:element minOccurs="0" name="cureResult" type="xs:int"/>
+<xs:element minOccurs="0" name="paymentSource" type="xs:int"/>
+<xs:element minOccurs="0" name="changeDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="userUniqueId" type="xs:string"/>
+<xs:element minOccurs="0" name="patientType" type="ns1:patientType"/>
+<xs:element minOccurs="0" name="simpleServices">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="ps" type="tns:SimpleService"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="invoices">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="invoice" type="tns:invoice"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="diagnoses" nillable="true" type="tns:diagnosis"/>
+<xs:element minOccurs="0" name="systemSource" type="tns:systemSource"/>
+<xs:element minOccurs="0" name="doctorJobId" type="xs:long"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="errors" nillable="true" type="ns1:checkCaseError"/>
+<xs:element minOccurs="0" name="directionDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="directionLpuId" type="xs:long"/>
+<xs:element minOccurs="0" name="directionDoctorSpec" type="xs:string"/>
+<xs:element minOccurs="0" name="directionNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="injury" type="xs:int"/>
+<xs:element minOccurs="0" name="specialCase" type="xs:string"/>
+<xs:element name="canEdit" type="xs:boolean"/>
+<xs:element minOccurs="0" name="hospitalizationType" type="xs:long"/>
+<xs:element minOccurs="0" name="changed" type="xs:boolean"/>
+<xs:element minOccurs="0" name="caseAmount" type="xs:decimal"/>
+<xs:element minOccurs="0" name="caseAmountError" type="xs:decimal"/>
+<xs:element minOccurs="0" name="directionDiagnosis" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="medcaseDirections" nillable="true" type="ns1:medcaseDirection"/>
+<xs:element minOccurs="0" name="targetDoctorSpec" type="xs:string"/>
+<xs:element minOccurs="0" name="newbornWeightGr" type="xs:int"/>
+<xs:element minOccurs="0" name="patientFio" type="xs:string"/>
+<xs:element minOccurs="0" name="specialistFio" type="xs:string"/>
+<xs:element minOccurs="0" name="specialistTabelNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="compositeDoctorId" type="xs:string"/>
+<xs:element minOccurs="0" name="compositeNurseId" type="xs:string"/>
+<xs:element name="overrideChangeDate" type="xs:boolean"/>
+<xs:element minOccurs="0" name="policyNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="applicationSource" type="tns:applicationSource"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="AbstractBaseEntity">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="SimpleService">
+<xs:complexContent>
+<xs:extension base="tns:costAware">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="statusChangeDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="serviceCode" type="xs:string"/>
+<xs:element minOccurs="0" name="quantity" type="xs:int"/>
+<xs:element minOccurs="0" name="specialCase" type="xs:string"/>
+<xs:element minOccurs="0" name="codePosobr" type="xs:string"/>
+<xs:element minOccurs="0" name="changeDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="medicalCaseId" type="xs:long"/>
+<xs:element minOccurs="0" name="invoiceLifecycle" type="tns:InvoiceLifecycle"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="errors" nillable="true" type="ns1:checkServiceError"/>
+<xs:element minOccurs="0" name="executorId" type="xs:long"/>
+<xs:element minOccurs="0" name="executorJobId" type="xs:long"/>
+<xs:element minOccurs="0" name="postponeInvoice" type="xs:boolean"/>
+<xs:element minOccurs="0" name="skipInvoice" type="xs:boolean"/>
+<xs:element minOccurs="0" name="protocolURL" type="xs:string"/>
+<xs:element minOccurs="0" name="pictureURL" type="xs:string"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="costs" nillable="true" type="tns:Cost"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element name="canEdit" type="xs:boolean"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="costAware">
+<xs:complexContent>
+<xs:extension base="tns:AbstractBaseEntity">
+<xs:sequence/>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="InvoiceLifecycle">
+<xs:complexContent>
+<xs:extension base="tns:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="status" type="tns:invoiceStatus"/>
+<xs:element minOccurs="0" name="firstIssue" type="xs:boolean"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="Cost">
+<xs:complexContent>
+<xs:extension base="tns:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="simpleService" type="tns:SimpleService"/>
+<xs:element minOccurs="0" name="simpleServiceId" type="xs:long"/>
+<xs:element minOccurs="0" name="invoiceId" type="xs:long"/>
+<xs:element minOccurs="0" name="cost" type="xs:long"/>
+<xs:element minOccurs="0" name="tariff" type="xs:long"/>
+<xs:element minOccurs="0" name="hospDeptStay" type="ns1:hospDeptStay"/>
+<xs:element minOccurs="0" name="hospDeptStayId" type="xs:long"/>
+<xs:element minOccurs="0" name="simpleServiceCodeTransient" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="Manipulation">
+<xs:complexContent>
+<xs:extension base="tns:costAware">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="code" type="xs:string"/>
+<xs:element minOccurs="0" name="date" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="doctorSnils" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorId" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorName" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorSpec" type="xs:string"/>
+<xs:element minOccurs="0" name="doctorSpecName" type="xs:string"/>
+<xs:element minOccurs="0" name="ogrnMo" type="xs:string"/>
+<xs:element minOccurs="0" name="deviation" type="xs:int"/>
+<xs:element minOccurs="0" name="quantity" type="xs:int"/>
+<xs:element minOccurs="0" name="toothFormulas">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="toothFormula" type="ns1:toothFormula"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="indicators">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="indicator" type="tns:Indicator"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="Indicator">
+<xs:complexContent>
+<xs:extension base="tns:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="type" type="xs:int"/>
+<xs:element minOccurs="0" name="measure" type="xs:int"/>
+<xs:element minOccurs="0" name="value" type="xs:decimal"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="invoice">
+<xs:complexContent>
+<xs:extension base="tns:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="statusChangeDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="financingType" type="tns:financingType"/>
+<xs:element minOccurs="0" name="patientAttachLpuId" type="xs:string"/>
+<xs:element minOccurs="0" name="sum" type="xs:long"/>
+<xs:element minOccurs="0" name="invoiceDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="codePsp" type="tns:codePsp"/>
+<xs:element minOccurs="0" name="recid" type="xs:long"/>
+<xs:element minOccurs="0" name="patientAttachType" type="tns:serviceType"/>
+<xs:element minOccurs="0" name="errors">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="error" type="tns:CaseCheckError"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="costs">
+<xs:complexType>
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="cost" type="tns:Cost"/>
+</xs:sequence>
+</xs:complexType>
+</xs:element>
+<xs:element minOccurs="0" name="invoiceLifecycle" type="tns:InvoiceLifecycle"/>
+<xs:element minOccurs="0" name="sumMee" type="xs:long"/>
+<xs:element minOccurs="0" name="sumEkmp" type="xs:long"/>
+<xs:element minOccurs="0" name="comment" type="xs:string"/>
+<xs:element minOccurs="0" name="du" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="ku" type="xs:int"/>
+<xs:element minOccurs="0" name="medicalCaseDateTransient" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="medicalCasePatientIdTransient" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="CaseCheckError">
+<xs:complexContent>
+<xs:extension base="tns:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="errorCode" type="xs:string"/>
+<xs:element minOccurs="0" name="errorDate" type="xs:dateTime"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="diagnosis">
+<xs:complexContent>
+<xs:extension base="tns:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="code" type="xs:string"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="type" type="tns:diagnosisType"/>
+<xs:element minOccurs="0" name="codeZ" type="tns:diagnosisCodeZ"/>
+<xs:element minOccurs="0" name="codeD" type="xs:int"/>
+<xs:element minOccurs="0" name="codeT" type="xs:int"/>
+<xs:element minOccurs="0" name="medicalCaseId" type="xs:long"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="applicationSource">
+<xs:sequence>
+<xs:element minOccurs="0" name="source" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Payer">
+<xs:sequence>
+<xs:element minOccurs="0" name="billFetchType" type="tns:billFetchType"/>
+<xs:element minOccurs="0" name="payerCode" type="xs:string"/>
+<xs:element minOccurs="0" name="payerId" type="xs:string"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="qqCode" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="Bill">
+<xs:complexContent>
+<xs:extension base="tns:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="status" type="tns:billStatus"/>
+<xs:element minOccurs="0" name="statusChangeDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="billType" type="tns:billFetchType"/>
+<xs:element minOccurs="0" name="payerId" type="xs:string"/>
+<xs:element minOccurs="0" name="amount" type="xs:long"/>
+<xs:element minOccurs="0" name="amountMee" type="xs:long"/>
+<xs:element minOccurs="0" name="amountEkmp" type="xs:long"/>
+<xs:element minOccurs="0" name="invNumber" type="xs:string"/>
+<xs:element minOccurs="0" name="invDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="nOut" type="xs:string"/>
+<xs:element minOccurs="0" name="dateIn" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="expertFio" type="xs:string"/>
+<xs:element minOccurs="0" name="numberMek" type="xs:string"/>
+<xs:element minOccurs="0" name="comment" type="xs:string"/>
+<xs:element minOccurs="0" name="payerOgrn" type="xs:string"/>
+<xs:element minOccurs="0" name="responseDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="trackId" type="xs:string"/>
+<xs:element minOccurs="0" name="errorAmount" type="xs:long"/>
+<xs:element minOccurs="0" name="capitationAmount" type="xs:long"/>
+<xs:element minOccurs="0" name="invoicesCount" type="xs:int"/>
+<xs:element minOccurs="0" name="patientsCount" type="xs:int"/>
+<xs:element minOccurs="0" name="attachedInvoicesCount" type="xs:int"/>
+<xs:element minOccurs="0" ref="tns:billAttachment"/>
+<xs:element minOccurs="0" ref="tns:billParcel"/>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="billErrorLogList" nillable="true" type="tns:billErrorLog"/>
+<xs:element minOccurs="0" name="payerCode" type="xs:string"/>
+<xs:element minOccurs="0" name="versionNumber" type="xs:long"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="billAttachment">
+<xs:complexContent>
+<xs:extension base="tns:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="billId" type="xs:long"/>
+<xs:element minOccurs="0" name="fileData" type="xs:base64Binary"/>
+<xs:element minOccurs="0" name="bill" type="tns:Bill"/>
+<xs:element minOccurs="0" name="errorText" type="xs:string"/>
+<xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="messageId" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="billParcel">
+<xs:complexContent>
+<xs:extension base="tns:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="billId" type="xs:long"/>
+<xs:element minOccurs="0" name="parcelData" type="xs:base64Binary"/>
+<xs:element minOccurs="0" name="parcelPasData" type="xs:base64Binary"/>
+<xs:element minOccurs="0" name="bill" type="tns:Bill"/>
+<xs:element minOccurs="0" name="errorText" type="xs:string"/>
+<xs:element minOccurs="0" name="created" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="messageId" type="xs:string"/>
+<xs:element minOccurs="0" name="parcelId" type="xs:long"/>
+<xs:element minOccurs="0" name="path" type="xs:string"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType name="billErrorLog">
+<xs:complexContent>
+<xs:extension base="tns:AbstractBaseEntity">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="stackTrace" type="xs:string"/>
+<xs:element minOccurs="0" name="exceptionMessage" type="xs:string"/>
+<xs:element minOccurs="0" name="errorMessage" type="xs:string"/>
+<xs:element minOccurs="0" name="type" type="xs:short"/>
+<xs:element minOccurs="0" name="bill" type="tns:Bill"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:simpleType name="systemSource">
+<xs:restriction base="xs:string">
+<xs:enumeration value="ARM_PUMP"/>
+<xs:enumeration value="EMIAS"/>
+<xs:enumeration value="LIS"/>
+<xs:enumeration value="INFONOM"/>
+<xs:enumeration value="WSDL"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="status">
+<xs:restriction base="xs:string">
+<xs:enumeration value="CREATED"/>
+<xs:enumeration value="POSTPONED"/>
+<xs:enumeration value="DELETED"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="caseType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="MEDICAL_CASE"/>
+<xs:enumeration value="AMB"/>
+<xs:enumeration value="YAR_POLYCLINIC"/>
+<xs:enumeration value="YAR_STOMATOLOGY"/>
+<xs:enumeration value="HOSP"/>
+<xs:enumeration value="YAR_EMERGENCY_AMBULANCE"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="invoiceStatus">
+<xs:restriction base="xs:string">
+<xs:enumeration value="UNCHECKED"/>
+<xs:enumeration value="SENT_TO_PAYER"/>
+<xs:enumeration value="PAYMENT_ACCEPTED"/>
+<xs:enumeration value="PAYMENT_ACCEPTED_WITH_MEE"/>
+<xs:enumeration value="PAYMENT_POSTPONED"/>
+<xs:enumeration value="PAYMENT_REJECTED"/>
+<xs:enumeration value="CHECKED_OK"/>
+<xs:enumeration value="CHECKED_ERROR"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="financingType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="UNKNOWN"/>
+<xs:enumeration value="CAPITATION"/>
+<xs:enumeration value="PREVENTIVE"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="codePsp">
+<xs:restriction base="xs:string">
+<xs:enumeration value="Policlinic"/>
+<xs:enumeration value="AdditionalAmbulatoryServicesOfHospitalType"/>
+<xs:enumeration value="Stationary"/>
+<xs:enumeration value="VMP"/>
+<xs:enumeration value="MayBeItIsAdditionalAmbulatoryServicesOfHospitalType"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="serviceType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="TR"/>
+<xs:enumeration value="ST"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="diagnosisType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="MAIN"/>
+<xs:enumeration value="ADDITIONAL"/>
+<xs:enumeration value="ACCOMPANYING"/>
+<xs:enumeration value="COMPLICATION"/>
+<xs:enumeration value="AUTOPSY_ADDITIONAL"/>
+<xs:enumeration value="AUTOPSY_ACCOMPANYING"/>
+<xs:enumeration value="AUTOPSY_MAIN"/>
+<xs:enumeration value="AUTOPSY_COMPLICATION"/>
+<xs:enumeration value="DIRECTION_DIAGNOSIS"/>
+<xs:enumeration value="STATISTICS"/>
+<xs:enumeration value="DIRECTION_OUT"/>
+<xs:enumeration value="DIRECTION_IN"/>
+<xs:enumeration value="RECEPRION"/>
+<xs:enumeration value="PATHOLOGICAL_MAIN"/>
+<xs:enumeration value="PATHOLOGICAL_ADDITIONAL"/>
+<xs:enumeration value="PATHOLOGICAL_ACCOMPANYNG"/>
+<xs:enumeration value="PATHOLOGICAL_DEATH"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="diagnosisCodeZ">
+<xs:restriction base="xs:string">
+<xs:enumeration value="IGNORE"/>
+<xs:enumeration value="FIRST_TIME"/>
+<xs:enumeration value="REPEATED"/>
+<xs:enumeration value="PREV_ESTABL_REPEATED"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="billFetchType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="SPECIAL"/>
+<xs:enumeration value="SMO"/>
+</xs:restriction>
+</xs:simpleType>
+<xs:simpleType name="billStatus">
+<xs:restriction base="xs:string">
+<xs:enumeration value="GENERATION"/>
+<xs:enumeration value="GENERATED"/>
+<xs:enumeration value="NEW"/>
+<xs:enumeration value="P_CREATING"/>
+<xs:enumeration value="P_CREATING_E"/>
+<xs:enumeration value="P_SENDING"/>
+<xs:enumeration value="P_SENDING_E"/>
+<xs:enumeration value="SENT"/>
+<xs:enumeration value="ACCEPTED"/>
+<xs:enumeration value="RECIEVED"/>
+<xs:enumeration value="RECIEVED_E"/>
+<xs:enumeration value="FLK_INPROGRESS"/>
+<xs:enumeration value="FLK_FINISHED"/>
+<xs:enumeration value="DRAFT"/>
+<xs:enumeration value="RECREATE_QUEUE"/>
+<xs:enumeration value="SEND_QUEUE"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="createUpdateAmbCase">
+<wsdl:part element="ns1:createUpdateAmbCase" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getInvoicePassportResponse">
+<wsdl:part element="ns1:getInvoicePassportResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="removeMedCaseResponse">
+<wsdl:part element="ns1:removeMedCaseResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getUpErrors">
+<wsdl:part element="ns1:getUpErrors" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getMailGw">
+<wsdl:part element="ns1:getMailGw" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="listBills">
+<wsdl:part element="ns1:listBills" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAmbCaseResponse">
+<wsdl:part element="ns1:getAmbCaseResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="Exception">
+<wsdl:part element="ns1:Exception" name="Exception"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getExpertiseFileResponse">
+<wsdl:part element="ns1:getExpertiseFileResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getHospCaseResponse">
+<wsdl:part element="ns1:getHospCaseResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createUpdateAmbCaseResponse">
+<wsdl:part element="ns1:createUpdateAmbCaseResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="findDocumentsResponse">
+<wsdl:part element="ns1:findDocumentsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="listPeriods">
+<wsdl:part element="ns1:listPeriods" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="changeBillStatusResponse">
+<wsdl:part element="ns1:changeBillStatusResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createUpdateHospCase">
+<wsdl:part element="ns1:createUpdateHospCase" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getUdErrors">
+<wsdl:part element="ns1:getUdErrors" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="listPeriodsResponse">
+<wsdl:part element="ns1:listPeriodsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="removeMedCase">
+<wsdl:part element="ns1:removeMedCase" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getInvoicePassport">
+<wsdl:part element="ns1:getInvoicePassport" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getHospCase">
+<wsdl:part element="ns1:getHospCase" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="changeBillStatus">
+<wsdl:part element="ns1:changeBillStatus" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="sendMGFOMS">
+<wsdl:part element="ns1:sendMGFOMS" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="findDocuments">
+<wsdl:part element="ns1:findDocuments" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getExpertiseFile">
+<wsdl:part element="ns1:getExpertiseFile" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="sendMGFOMSResponse">
+<wsdl:part element="ns1:sendMGFOMSResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getUpErrorsResponse">
+<wsdl:part element="ns1:getUpErrorsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="listBillsResponse">
+<wsdl:part element="ns1:listBillsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getMeErrorsResponse">
+<wsdl:part element="ns1:getMeErrorsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getMeErrors">
+<wsdl:part element="ns1:getMeErrors" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getUdErrorsResponse">
+<wsdl:part element="ns1:getUdErrorsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createUpdateHospCaseResponse">
+<wsdl:part element="ns1:createUpdateHospCaseResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getAmbCase">
+<wsdl:part element="ns1:getAmbCase" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getMailGwResponse">
+<wsdl:part element="ns1:getMailGwResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="searchErrors">
+<wsdl:part element="ns1:searchErrors" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="searchErrorsResponse">
+<wsdl:part element="ns1:searchErrorsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:portType name="PmpWs">
+<wsdl:operation name="createUpdateAmbCase">
+<wsdl:input message="ns1:createUpdateAmbCase" name="createUpdateAmbCase"></wsdl:input>
+<wsdl:output message="ns1:createUpdateAmbCaseResponse" name="createUpdateAmbCaseResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getInvoicePassport">
+<wsdl:input message="ns1:getInvoicePassport" name="getInvoicePassport"></wsdl:input>
+<wsdl:output message="ns1:getInvoicePassportResponse" name="getInvoicePassportResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getUpErrors">
+<wsdl:input message="ns1:getUpErrors" name="getUpErrors"></wsdl:input>
+<wsdl:output message="ns1:getUpErrorsResponse" name="getUpErrorsResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getHospCase">
+<wsdl:input message="ns1:getHospCase" name="getHospCase"></wsdl:input>
+<wsdl:output message="ns1:getHospCaseResponse" name="getHospCaseResponse"></wsdl:output>
+<wsdl:fault message="ns1:Exception" name="Exception"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="getMailGw">
+<wsdl:input message="ns1:getMailGw" name="getMailGw"></wsdl:input>
+<wsdl:output message="ns1:getMailGwResponse" name="getMailGwResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="listBills">
+<wsdl:input message="ns1:listBills" name="listBills"></wsdl:input>
+<wsdl:output message="ns1:listBillsResponse" name="listBillsResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="changeBillStatus">
+<wsdl:input message="ns1:changeBillStatus" name="changeBillStatus"></wsdl:input>
+<wsdl:output message="ns1:changeBillStatusResponse" name="changeBillStatusResponse"></wsdl:output>
+<wsdl:fault message="ns1:Exception" name="Exception"></wsdl:fault>
+</wsdl:operation>
+<wsdl:operation name="sendMGFOMS">
+<wsdl:input message="ns1:sendMGFOMS" name="sendMGFOMS"></wsdl:input>
+<wsdl:output message="ns1:sendMGFOMSResponse" name="sendMGFOMSResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="findDocuments">
+<wsdl:input message="ns1:findDocuments" name="findDocuments"></wsdl:input>
+<wsdl:output message="ns1:findDocumentsResponse" name="findDocumentsResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getExpertiseFile">
+<wsdl:input message="ns1:getExpertiseFile" name="getExpertiseFile"></wsdl:input>
+<wsdl:output message="ns1:getExpertiseFileResponse" name="getExpertiseFileResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getMeErrors">
+<wsdl:input message="ns1:getMeErrors" name="getMeErrors"></wsdl:input>
+<wsdl:output message="ns1:getMeErrorsResponse" name="getMeErrorsResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="listPeriods">
+<wsdl:input message="ns1:listPeriods" name="listPeriods"></wsdl:input>
+<wsdl:output message="ns1:listPeriodsResponse" name="listPeriodsResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getAmbCase">
+<wsdl:input message="ns1:getAmbCase" name="getAmbCase"></wsdl:input>
+<wsdl:output message="ns1:getAmbCaseResponse" name="getAmbCaseResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="createUpdateHospCase">
+<wsdl:input message="ns1:createUpdateHospCase" name="createUpdateHospCase"></wsdl:input>
+<wsdl:output message="ns1:createUpdateHospCaseResponse" name="createUpdateHospCaseResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getUdErrors">
+<wsdl:input message="ns1:getUdErrors" name="getUdErrors"></wsdl:input>
+<wsdl:output message="ns1:getUdErrorsResponse" name="getUdErrorsResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="removeMedCase">
+<wsdl:input message="ns1:removeMedCase" name="removeMedCase"></wsdl:input>
+<wsdl:output message="ns1:removeMedCaseResponse" name="removeMedCaseResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="searchErrors">
+<wsdl:input message="ns1:searchErrors" name="searchErrors"></wsdl:input>
+<wsdl:output message="ns1:searchErrorsResponse" name="searchErrorsResponse"></wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+</wsdl:definitions>

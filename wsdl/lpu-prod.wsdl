@@ -1,0 +1,227 @@
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://ws.lpu.pmp.ibs.ru/" name="LpuWs" targetNamespace="http://ws.lpu.pmp.ibs.ru/">
+<wsdl:types>
+<xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.lpu.pmp.ibs.ru/" elementFormDefault="unqualified" targetNamespace="http://ws.lpu.pmp.ibs.ru/" version="1.0">
+<xs:element name="createUpdateMoDept" type="tns:createUpdateMoDept"/>
+<xs:element name="createUpdateMoDeptResponse" type="tns:createUpdateMoDeptResponse"/>
+<xs:element name="deleteMoDept" type="tns:deleteMoDept"/>
+<xs:element name="deleteMoDeptResponse" type="tns:deleteMoDeptResponse"/>
+<xs:element name="getMos" type="tns:getMos"/>
+<xs:element name="getMosResponse" type="tns:getMosResponse"/>
+<xs:element name="searchMoDepts" type="tns:searchMoDepts"/>
+<xs:element name="searchMoDeptsResponse" type="tns:searchMoDeptsResponse"/>
+<xs:complexType name="createUpdateMoDept">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="request" type="tns:saveMoDeptRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="wsAuthInfo">
+<xs:sequence>
+<xs:element name="orgId" type="xs:long"/>
+<xs:element name="system" type="xs:string"/>
+<xs:element name="user" type="xs:string"/>
+<xs:element name="password" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="saveMoDeptRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="bedCount" type="xs:int"/>
+<xs:element minOccurs="0" name="depServiceCondition" type="xs:string"/>
+<xs:element minOccurs="0" name="deptEndDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="deptStartDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="deptVozCode" type="xs:string"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="profileCode" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createUpdateMoDeptResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:deptStatusMessage"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deptStatusMessage">
+<xs:sequence>
+<xs:element minOccurs="0" name="entity" type="tns:MoDepartment"/>
+<xs:element minOccurs="0" name="result" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="MoDepartment">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="facetCode" type="xs:string"/>
+<xs:element name="name" type="xs:string"/>
+<xs:element name="deptStartDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="deptEndDate" type="xs:dateTime"/>
+<xs:element name="profileCode" type="xs:string"/>
+<xs:element name="depServiceCondition" type="xs:string"/>
+<xs:element name="deptVozCode" type="xs:string"/>
+<xs:element name="bedCount" type="xs:int"/>
+<xs:element minOccurs="0" name="filId" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMos">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="request" type="tns:getMosRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMosRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="isRoot" type="xs:boolean"/>
+<xs:element minOccurs="0" name="moId" type="xs:long"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="offset" type="xs:int"/>
+<xs:element minOccurs="0" name="size" type="xs:int"/>
+<xs:element name="sortAsc" type="xs:boolean"/>
+<xs:element minOccurs="0" name="sortField" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="getMosResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:listModel"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="listModel">
+<xs:sequence>
+<xs:element maxOccurs="unbounded" minOccurs="0" name="items" nillable="true" type="xs:anyType"/>
+<xs:element name="pagingOffset" type="xs:int"/>
+<xs:element name="pagingSize" type="xs:int"/>
+<xs:element name="pagingTotal" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="mo">
+<xs:complexContent>
+<xs:extension base="tns:abstractIdentifiable">
+<xs:sequence>
+<xs:element minOccurs="0" name="facetedCode" type="xs:string"/>
+<xs:element minOccurs="0" name="moid" type="xs:long"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="name" type="xs:string"/>
+<xs:element minOccurs="0" name="fullName" type="xs:string"/>
+<xs:element minOccurs="0" name="districtCode" type="xs:string"/>
+<xs:element minOccurs="0" name="adres" type="xs:string"/>
+<xs:element minOccurs="0" name="in" type="xs:string"/>
+<xs:element minOccurs="0" name="dn_in" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="du_in" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="prn_kodved" type="xs:string"/>
+<xs:element minOccurs="0" name="cod_uz" type="xs:string"/>
+<xs:element minOccurs="0" name="ogrn" type="xs:string"/>
+<xs:element minOccurs="0" name="fcod" type="xs:string"/>
+<xs:element minOccurs="0" name="tpn" type="xs:string"/>
+<xs:element minOccurs="0" name="vmp" type="xs:string"/>
+<xs:element minOccurs="0" name="k2" type="xs:string"/>
+<xs:element minOccurs="0" name="moDateStart" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="moDateEnd" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="moChangeDate" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="moSystemSource" type="xs:string"/>
+<xs:element minOccurs="0" name="moType" type="tns:moType"/>
+</xs:sequence>
+</xs:extension>
+</xs:complexContent>
+</xs:complexType>
+<xs:complexType abstract="true" name="abstractIdentifiable">
+<xs:sequence/>
+</xs:complexType>
+<xs:complexType name="searchMoDepts">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="request" type="tns:searchMoDeptsRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="searchMoDeptsRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="changeDate" type="xs:string"/>
+<xs:element minOccurs="0" name="deptName" type="xs:string"/>
+<xs:element minOccurs="0" name="endDate" type="xs:string"/>
+<xs:element minOccurs="0" name="facetCode" type="xs:string"/>
+<xs:element minOccurs="0" name="filid" type="xs:long"/>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element minOccurs="0" name="moid" type="xs:long"/>
+<xs:element minOccurs="0" name="momoid" type="xs:long"/>
+<xs:element name="offset" type="xs:int"/>
+<xs:element minOccurs="0" name="prCode" type="xs:string"/>
+<xs:element minOccurs="0" name="profot" type="xs:string"/>
+<xs:element minOccurs="0" name="size" type="xs:int"/>
+<xs:element name="sortAsc" type="xs:boolean"/>
+<xs:element minOccurs="0" name="sortField" type="xs:string"/>
+<xs:element minOccurs="0" name="source" type="xs:string"/>
+<xs:element minOccurs="0" name="startDate" type="xs:string"/>
+<xs:element minOccurs="0" name="vozCode" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="searchMoDeptsResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:listModel"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteMoDept">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element name="request" type="tns:deleteMoDeptRequest"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteMoDeptRequest">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteMoDeptResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:deptStatusMessage"/>
+</xs:sequence>
+</xs:complexType>
+<xs:simpleType name="moType">
+<xs:restriction base="xs:string">
+<xs:enumeration value="NONE"/>
+<xs:enumeration value="CLINIC"/>
+<xs:enumeration value="HOSP"/>
+<xs:enumeration value="SMP"/>
+<xs:enumeration value="CLINIC_AND_HOSP"/>
+</xs:restriction>
+</xs:simpleType>
+</xs:schema>
+</wsdl:types>
+<wsdl:message name="searchMoDeptsResponse">
+<wsdl:part element="ns1:searchMoDeptsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="deleteMoDeptResponse">
+<wsdl:part element="ns1:deleteMoDeptResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createUpdateMoDept">
+<wsdl:part element="ns1:createUpdateMoDept" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createUpdateMoDeptResponse">
+<wsdl:part element="ns1:createUpdateMoDeptResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="deleteMoDept">
+<wsdl:part element="ns1:deleteMoDept" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getMos">
+<wsdl:part element="ns1:getMos" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="searchMoDepts">
+<wsdl:part element="ns1:searchMoDepts" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getMosResponse">
+<wsdl:part element="ns1:getMosResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:portType name="LpuWs">
+<wsdl:operation name="createUpdateMoDept">
+<wsdl:input message="ns1:createUpdateMoDept" name="createUpdateMoDept"></wsdl:input>
+<wsdl:output message="ns1:createUpdateMoDeptResponse" name="createUpdateMoDeptResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="getMos">
+<wsdl:input message="ns1:getMos" name="getMos"></wsdl:input>
+<wsdl:output message="ns1:getMosResponse" name="getMosResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="searchMoDepts">
+<wsdl:input message="ns1:searchMoDepts" name="searchMoDepts"></wsdl:input>
+<wsdl:output message="ns1:searchMoDeptsResponse" name="searchMoDeptsResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="deleteMoDept">
+<wsdl:input message="ns1:deleteMoDept" name="deleteMoDept"></wsdl:input>
+<wsdl:output message="ns1:deleteMoDeptResponse" name="deleteMoDeptResponse"></wsdl:output>
+</wsdl:operation>
+</wsdl:portType>
+</wsdl:definitions>
