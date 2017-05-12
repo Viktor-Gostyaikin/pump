@@ -136,6 +136,7 @@
 <xs:element minOccurs="0" name="endDate" type="xs:string"/>
 <xs:element minOccurs="0" name="facetCode" type="xs:string"/>
 <xs:element minOccurs="0" name="filid" type="xs:long"/>
+<xs:element minOccurs="0" name="filterValue" type="xs:string"/>
 <xs:element minOccurs="0" name="id" type="xs:long"/>
 <xs:element minOccurs="0" name="moid" type="xs:long"/>
 <xs:element minOccurs="0" name="momoid" type="xs:long"/>

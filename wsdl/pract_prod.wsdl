@@ -1,11 +1,15 @@
-<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://ws.practitioners.pmp.ibs.ru/" name="PractWs" targetNamespace="http://ws.practitioners.pmp.ibs.ru/">
+wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://ws.practitioners.pmp.ibs.ru/" name="PractWs" targetNamespace="http://ws.practitioners.pmp.ibs.ru/">
 <wsdl:types>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.practitioners.pmp.ibs.ru/" elementFormDefault="unqualified" targetNamespace="http://ws.practitioners.pmp.ibs.ru/" version="1.0">
 <xs:element name="Practitioner" type="tns:practitioner"/>
+<xs:element name="createUpdateMOPractCert" type="tns:createUpdateMOPractCert"/>
+<xs:element name="createUpdateMOPractCertResponse" type="tns:createUpdateMOPractCertResponse"/>
 <xs:element name="createUpdateMOPractJob" type="tns:createUpdateMOPractJob"/>
 <xs:element name="createUpdateMOPractJobResponse" type="tns:createUpdateMOPractJobResponse"/>
 <xs:element name="createUpdateMoPract" type="tns:createUpdateMoPract"/>
 <xs:element name="createUpdateMoPractResponse" type="tns:createUpdateMoPractResponse"/>
+<xs:element name="deleteMOPractCert" type="tns:deleteMOPractCert"/>
+<xs:element name="deleteMOPractCertResponse" type="tns:deleteMOPractCertResponse"/>
 <xs:element name="deleteMOPractJobs" type="tns:deleteMOPractJobs"/>
 <xs:element name="deleteMOPractJobsResponse" type="tns:deleteMOPractJobsResponse"/>
 <xs:element name="deleteMOPracts" type="tns:deleteMOPracts"/>
@@ -120,7 +124,7 @@
 <xs:sequence>
 <xs:element minOccurs="0" name="id" type="xs:long"/>
 <xs:element name="specCode" type="xs:string"/>
-<xs:element name="specCertSeria" type="xs:string"/>
+<xs:element minOccurs="0" name="specCertSeria" type="xs:string"/>
 <xs:element name="certNum" type="xs:string"/>
 <xs:element minOccurs="0" name="certSchool" type="xs:string"/>
 <xs:element name="dateStart" type="xs:dateTime"/>
@@ -325,6 +329,47 @@
 <xs:element minOccurs="0" name="patronymic" type="xs:string"/>
 </xs:sequence>
 </xs:complexType>
+<xs:complexType name="createUpdateMOPractCert">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element minOccurs="0" name="createUpdateMOPractCertRequest" type="tns:certDTO"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="certDTO">
+<xs:sequence>
+<xs:element minOccurs="0" name="id" type="xs:long"/>
+<xs:element name="practId" type="xs:long"/>
+<xs:element name="specCode" type="xs:string"/>
+<xs:element minOccurs="0" name="specCertSeria" type="xs:string"/>
+<xs:element name="certNum" type="xs:string"/>
+<xs:element name="certSchool" type="xs:string"/>
+<xs:element name="dateStart" type="xs:dateTime"/>
+<xs:element minOccurs="0" name="dateEnd" type="xs:dateTime"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="createUpdateMOPractCertResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:certificateMessage"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="certificateMessage">
+<xs:sequence>
+<xs:element minOccurs="0" name="entity" type="tns:Certificate"/>
+<xs:element minOccurs="0" name="practId" type="xs:long"/>
+<xs:element minOccurs="0" name="result" type="xs:string"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteMOPractCert">
+<xs:sequence>
+<xs:element name="authInfo" type="tns:wsAuthInfo"/>
+<xs:element minOccurs="0" name="deleteRequest" type="xs:long"/>
+</xs:sequence>
+</xs:complexType>
+<xs:complexType name="deleteMOPractCertResponse">
+<xs:sequence>
+<xs:element minOccurs="0" name="return" type="tns:certificateMessage"/>
+</xs:sequence>
+</xs:complexType>
 <xs:complexType name="createUpdateMoPract">
 <xs:sequence>
 <xs:element name="authInfo" type="tns:wsAuthInfo"/>
@@ -338,14 +383,35 @@
 </xs:complexType>
 </xs:schema>
 </wsdl:types>
-<wsdl:message name="deleteMOPractJobs">
-<wsdl:part element="ns1:deleteMOPractJobs" name="parameters"></wsdl:part>
-</wsdl:message>
 <wsdl:message name="deleteMOPracts">
 <wsdl:part element="ns1:deleteMOPracts" name="parameters"></wsdl:part>
 </wsdl:message>
 <wsdl:message name="getMOPractResponse">
 <wsdl:part element="ns1:getMOPractResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createUpdateMOPractCertResponse">
+<wsdl:part element="ns1:createUpdateMOPractCertResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getMOPractJob">
+<wsdl:part element="ns1:getMOPractJob" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="getMOPractJobResponse">
+<wsdl:part element="ns1:getMOPractJobResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createUpdateMOPractJobResponse">
+<wsdl:part element="ns1:createUpdateMOPractJobResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="deleteMOPractCert">
+<wsdl:part element="ns1:deleteMOPractCert" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="deleteMOPractsResponse">
+<wsdl:part element="ns1:deleteMOPractsResponse" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="createUpdateMoPract">
+<wsdl:part element="ns1:createUpdateMoPract" name="parameters"></wsdl:part>
+</wsdl:message>
+<wsdl:message name="deleteMOPractJobs">
+<wsdl:part element="ns1:deleteMOPractJobs" name="parameters"></wsdl:part>
 </wsdl:message>
 <wsdl:message name="createUpdateMoPractResponse">
 <wsdl:part element="ns1:createUpdateMoPractResponse" name="parameters"></wsdl:part>
@@ -356,23 +422,14 @@
 <wsdl:message name="getMOPract">
 <wsdl:part element="ns1:getMOPract" name="parameters"></wsdl:part>
 </wsdl:message>
-<wsdl:message name="getMOPractJob">
-<wsdl:part element="ns1:getMOPractJob" name="parameters"></wsdl:part>
+<wsdl:message name="deleteMOPractCertResponse">
+<wsdl:part element="ns1:deleteMOPractCertResponse" name="parameters"></wsdl:part>
 </wsdl:message>
 <wsdl:message name="deleteMOPractJobsResponse">
 <wsdl:part element="ns1:deleteMOPractJobsResponse" name="parameters"></wsdl:part>
 </wsdl:message>
-<wsdl:message name="getMOPractJobResponse">
-<wsdl:part element="ns1:getMOPractJobResponse" name="parameters"></wsdl:part>
-</wsdl:message>
-<wsdl:message name="createUpdateMOPractJobResponse">
-<wsdl:part element="ns1:createUpdateMOPractJobResponse" name="parameters"></wsdl:part>
-</wsdl:message>
-<wsdl:message name="deleteMOPractsResponse">
-<wsdl:part element="ns1:deleteMOPractsResponse" name="parameters"></wsdl:part>
-</wsdl:message>
-<wsdl:message name="createUpdateMoPract">
-<wsdl:part element="ns1:createUpdateMoPract" name="parameters"></wsdl:part>
+<wsdl:message name="createUpdateMOPractCert">
+<wsdl:part element="ns1:createUpdateMOPractCert" name="parameters"></wsdl:part>
 </wsdl:message>
 <wsdl:portType name="PractWs">
 <wsdl:operation name="deleteMOPractJobs">
@@ -394,6 +451,14 @@
 <wsdl:operation name="getMOPractJob">
 <wsdl:input message="ns1:getMOPractJob" name="getMOPractJob"></wsdl:input>
 <wsdl:output message="ns1:getMOPractJobResponse" name="getMOPractJobResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="createUpdateMOPractCert">
+<wsdl:input message="ns1:createUpdateMOPractCert" name="createUpdateMOPractCert"></wsdl:input>
+<wsdl:output message="ns1:createUpdateMOPractCertResponse" name="createUpdateMOPractCertResponse"></wsdl:output>
+</wsdl:operation>
+<wsdl:operation name="deleteMOPractCert">
+<wsdl:input message="ns1:deleteMOPractCert" name="deleteMOPractCert"></wsdl:input>
+<wsdl:output message="ns1:deleteMOPractCertResponse" name="deleteMOPractCertResponse"></wsdl:output>
 </wsdl:operation>
 <wsdl:operation name="createUpdateMoPract">
 <wsdl:input message="ns1:createUpdateMoPract" name="createUpdateMoPract"></wsdl:input>
