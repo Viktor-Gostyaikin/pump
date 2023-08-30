@@ -1,4 +1,4 @@
-wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://ws.practitioners.pmp.ibs.ru/" name="PractWs" targetNamespace="http://ws.practitioners.pmp.ibs.ru/">
+<wsdl:definitions xmlns:xsd="http://www.w3.org/2001/XMLSchema" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/" xmlns:ns1="http://ws.practitioners.pmp.ibs.ru/" name="PractWs" targetNamespace="http://ws.practitioners.pmp.ibs.ru/">
 <wsdl:types>
 <xs:schema xmlns:xs="http://www.w3.org/2001/XMLSchema" xmlns:tns="http://ws.practitioners.pmp.ibs.ru/" elementFormDefault="unqualified" targetNamespace="http://ws.practitioners.pmp.ibs.ru/" version="1.0">
 <xs:element name="Practitioner" type="tns:practitioner"/>
